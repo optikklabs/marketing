@@ -4,14 +4,17 @@ import { Github, Menu, Star, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { OptikkLogo } from "@/shared/components/brand/OptikkLogo";
+import { APP_URLS } from "@/shared/constants/app";
 
 import { OSS, formatStars } from "../constants";
 import { useGitHubStars } from "../hooks/useGitHubStars";
 
 const NAV_LINKS = [
   { label: "Platform", path: "/features" },
-  { label: "Architecture", path: "/architecture" },
+  { label: "CLI", path: "/cli" },
+  { label: "How it works", path: "/how-it-works" },
   { label: "OpenTelemetry", path: "/opentelemetry" },
+  { label: "Pricing", path: "/pricing" },
   { label: "Self-host", path: "/self-host" },
 ] as const;
 
@@ -33,7 +36,7 @@ function NavItem({ label, path }: { readonly label: string; readonly path: strin
   }
 
   return (
-    <Link className={className} to={(path as string & {})}>
+    <Link className={className} to={path as string & {}}>
       {label}
     </Link>
   );
@@ -68,7 +71,7 @@ export function Nav() {
   return (
     <header className={`m-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="m-container m-nav-inner">
-        <Link to={("/" as string & {})} className="m-brand" aria-label="Optikk home">
+        <Link to={"/" as string & {}} className="m-brand" aria-label="Optikk home">
           <OptikkLogo size={26} />
           <span className="m-brand-word">Optikk</span>
         </Link>
@@ -93,12 +96,12 @@ export function Nav() {
             <Star size={12} strokeWidth={2.4} />
             <span>{formatStars(totalStars)}</span>
           </a>
-          <Link to={("/login" as string & {})} className="m-btn m-btn-ghost m-btn-sm">
+          <a href={APP_URLS.login} className="m-btn m-btn-ghost m-btn-sm">
             Sign in
-          </Link>
-          <Link to={("/self-host" as string & {})} className="m-btn m-btn-primary m-btn-sm">
-            Self-host
-          </Link>
+          </a>
+          <a href={APP_URLS.signup} className="m-btn m-btn-primary m-btn-sm">
+            Sign up
+          </a>
           <button
             type="button"
             className="m-nav-toggle"
@@ -125,11 +128,13 @@ export function Nav() {
                   {link.label}
                 </a>
               ) : (
-                <Link key={link.path} to={(link.path as string & {})}>
+                <Link key={link.path} to={link.path as string & {}}>
                   {link.label}
                 </Link>
               )
             )}
+            <a href={APP_URLS.login}>Sign in</a>
+            <a href={APP_URLS.signup}>Sign up</a>
           </motion.div>
         ) : null}
       </AnimatePresence>

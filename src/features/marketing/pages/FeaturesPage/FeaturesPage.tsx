@@ -6,8 +6,21 @@ import { CodeBlock } from "../../sections/CodeBlock";
 import { Hero } from "../../sections/Hero";
 import { SectionHeader } from "../../sections/SectionHeader";
 import { Split } from "../../sections/Split";
-import { DashboardMock } from "../../visuals/DashboardMock";;
+import { DashboardMock } from "../../visuals/DashboardMock";
 import { Screenshot } from "../../visuals/Screenshot";
+import { TerminalWindow } from "../../visuals/TerminalWindow";
+
+const METRICS_SESSION = `$ optikk metrics query --metric http.server.duration \\
+    --aggregation p99 --group-by service --from 3h
+
+{
+  "series": [
+    { "group": "checkout",
+      "points": [["14:00", 312], ["14:05", 2410], ["14:10", 2395]] },
+    { "group": "api-gateway",
+      "points": [["14:00", 141], ["14:05", 139], ["14:10", 143]] }
+  ]
+}`;
 
 const ANCHORS = [
   { label: "Logs", id: "logs" },
@@ -56,7 +69,7 @@ export default function FeaturesPage() {
             list={[
               {
                 title: "Full-text + structured in one query",
-                body: 'level=ERROR service="checkout" AND msg ~ "timeout" — works the way you\'d type it in your head.',
+                body: 'level=ERROR service="checkout" AND msg ~ "timeout", working the way you\'d type it in your head.',
               },
               {
                 title: "Patterns auto-clustered",
@@ -103,7 +116,7 @@ export default function FeaturesPage() {
               },
               {
                 title: "Cardinality without throttling",
-                body: "Group by user, tenant, region, query, plan_id — anything. Tags are stored, not aggregated away.",
+                body: "Group by user, tenant, region, query, plan_id, or anything else. Tags are stored, not aggregated away.",
               },
               {
                 title: "OTLP native, schema-as-you-emit",
@@ -147,14 +160,7 @@ export default function FeaturesPage() {
                 body: "Skip the static-threshold tuning. Optikk learns the rhythm of your services.",
               },
             ]}
-            visual={
-              <Screenshot
-                name="service-detail"
-                alt="Optikk service detail with metrics and endpoint table"
-                bare
-                fallback={<DashboardMock type="metrics" />}
-              />
-            }
+            visual={<TerminalWindow title="~ optikk metrics">{METRICS_SESSION}</TerminalWindow>}
           />
         </div>
       </section>
@@ -170,8 +176,8 @@ export default function FeaturesPage() {
             }
             lede={
               <span style={{ color: "#c0cee0" }}>
-                The AI SRE reads the same telemetry graph your humans do — logs, traces, metrics,
-                deploys, dependencies — and writes the verdict in the language your tenant uses in
+                The AI SRE reads the same telemetry graph your humans do, including logs, traces, metrics,
+                deploys, and dependencies. It writes the verdict in the language your tenant uses in
                 Slack.
               </span>
             }
@@ -192,20 +198,21 @@ export default function FeaturesPage() {
                       {"\n"}
                       <span className="tok-k">Cause:</span>
                       {"  "}
-                      <span className="tok-s">"db.pool.exhausted"</span> on{" "}
-                      <span className="tok-n">checkout-api</span> after deploy{" "}
+                      <span className="tok-s">"Lock wait timeout exceeded"</span> on{" "}
+                      <span className="tok-n">payment-svc</span> after deploy{" "}
                       <span className="tok-n">abc12d</span>
                       {"\n"}
-                      <span className="tok-k">Window:</span> 14:02 → now (1.8% 5xx, p99 2.1s){"\n"}
+                      <span className="tok-k">Window:</span> 14:02 → now (checkout p99 310ms → 2.4s)
+                      {"\n"}
                       <span className="tok-k">Impact:</span> ~12k orders queued, 0 lost{"\n"}
                       <span className="tok-k">Evidence:</span>{" "}
-                      <span className="tok-n">trace:4af09c</span>,{" "}
-                      <span className="tok-n">log:db_pool_wait</span>,{" "}
+                      <span className="tok-n">trace:9f3c21ab</span>,{" "}
+                      <span className="tok-n">log:lock_wait_timeout</span>,{" "}
                       <span className="tok-n">deploy:abc12d</span>
                       {"\n"}
                       <span className="tok-k">Suggested fix:</span> revert{" "}
                       <span className="tok-n">abc12d</span> <span className="tok-c">{"// or"}</span>{" "}
-                      bump pool 32 → 64 in <span className="tok-s">"checkout-api.yaml"</span>
+                      add index on <span className="tok-s">"orders.tenant_id"</span>
                       {"\n"}
                       <span className="tok-k">Confidence:</span> <span className="tok-s">high</span>
                     </>
@@ -223,10 +230,10 @@ export default function FeaturesPage() {
                       {"\n"}
                       {"  "}
                       <span className="tok-n">alert_id</span>:{" "}
-                      <span className="tok-s">"db-pool-saturation"</span>,{"\n"}
+                      <span className="tok-s">"payment-lock-contention"</span>,{"\n"}
                       {"  "}
                       <span className="tok-n">scope</span>: <span className="tok-p">{"{"}</span>{" "}
-                      service: <span className="tok-s">"checkout-api"</span>, env:{" "}
+                      service: <span className="tok-s">"payment-svc"</span>, env:{" "}
                       <span className="tok-s">"prod"</span> <span className="tok-p">{"}"}</span>,
                       {"\n"}
                       {"  "}
@@ -287,7 +294,7 @@ export default function FeaturesPage() {
                         <span className="tok-s">"llm.completion"</span>){" "}
                         <span className="tok-k">as</span> sp:{"\n"}
                         {"    "}sp.set(<span className="tok-s">"model"</span>,{" "}
-                        <span className="tok-s">"claude-opus-4-7"</span>){"\n"}
+                        <span className="tok-s">"claude-opus-4-8"</span>){"\n"}
                         {"    "}sp.set(<span className="tok-s">"tenant"</span>, user.tenant){"\n"}
                         {"    "}sp.set(<span className="tok-s">"feature"</span>,{" "}
                         <span className="tok-s">"chat.assist"</span>){"\n"}
@@ -370,7 +377,7 @@ export default function FeaturesPage() {
         }
         subtitle="Fully self-hostable in under 5 minutes with our Helm chart."
         primary={{ label: "Self-host now", path: "/self-host" }}
-        secondary={{ label: "Read architecture", path: "/architecture", variant: "secondary" }}
+        secondary={{ label: "See how it works", path: "/how-it-works", variant: "secondary" }}
       />
     </>
   );

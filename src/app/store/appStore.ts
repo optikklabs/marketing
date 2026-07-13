@@ -201,7 +201,7 @@ export const useAppStore = create<AppState>()(
   )
 );
 
-// Computed selectors — use these instead of accessing store shape directly.
+// Computed selectors - use these instead of accessing store shape directly.
 // Reduces coupling so store internals can change without updating every consumer.
 export const useTimeRange = () => useAppStore((s) => s.timeRange);
 export const useTenantId = () => useAppStore((s) => s.selectedTenantId);

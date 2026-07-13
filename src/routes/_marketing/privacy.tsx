@@ -6,8 +6,5 @@ const PrivacyPolicyPageLazy = lazy(
 );
 
 export const Route = createFileRoute("/_marketing/privacy")({
-  component: () => (
-      <PrivacyPolicyPageLazy />
-
-  ),
+  component: () => <PrivacyPolicyPageLazy />,
 });

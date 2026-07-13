@@ -1,10 +1,14 @@
 {
   "hosting": {
+    "site": "optikk-frontend",
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "source": "/install.sh",
+        "destination": "https://raw.githubusercontent.com/optikklabs/optikk/main/install.sh",
+        "type": 302
+      }
     ],
     "rewrites": [
       {
@@ -12,21 +16,15 @@
         "destination": "/index.html"
       }
     ],
-    "redirects": [
+
+    "headers": [
       {
-        "source": "/signin",
-        "destination": "https://app.optikk.in/login",
-        "type": 301
+        "source": "**",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       },
       {
-        "source": "/login",
-        "destination": "https://app.optikk.in/login",
-        "type": 301
-      },
-      {
-        "source": "/signup",
-        "destination": "https://app.optikk.in/signup",
-        "type": 301
+        "source": "/assets/**",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
       }
     ]
   }

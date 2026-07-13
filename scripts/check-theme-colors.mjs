@@ -1,5 +1,5 @@
 // Theme-color guardrail: components must use semantic utilities or
-// [var(--token)] in className — no Tailwind named colors, raw hex, or rgb().
+// [var(--token)] in className - no Tailwind named colors, raw hex, or rgb().
 // Raw colors are only allowed in inline style={{}} and .css files.
 // Marketing keeps its own scoped theme and is excluded.
 import { execSync } from "node:child_process";

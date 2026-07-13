@@ -2,8 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { ComponentType, ReactNode } from "react";
 
-
-import { Stagger, StaggerItem } from "../motion/Stagger";
+import { Reveal } from "../motion/Reveal";
 
 interface FeatureItem {
   readonly icon?: ComponentType<{ size?: number }>;
@@ -42,7 +41,7 @@ function FeatureLink({ link }: { readonly link: FeatureItem["link"] }) {
     );
   }
   return (
-    <Link className="m-bento-link" to={(link.path as string & {})}>
+    <Link className="m-bento-link" to={link.path as string & {}}>
       {link.label} <ArrowRight size={14} />
     </Link>
   );
@@ -50,15 +49,11 @@ function FeatureLink({ link }: { readonly link: FeatureItem["link"] }) {
 
 export function FeatureGrid({ items }: FeatureGridProps) {
   return (
-    <Stagger className="m-bento">
+    <Reveal className="m-bento">
       {items.map((item, idx) => {
         const Icon = item.icon;
         return (
-          <StaggerItem
-            key={idx}
-            as="article"
-            className={`m-bento-card ${variantClass(item.variant)}`}
-          >
+          <article key={idx} className={`m-bento-card ${variantClass(item.variant)}`}>
             {Icon ? (
               <span className="m-bento-icon">
                 <Icon size={20} />
@@ -67,9 +62,9 @@ export function FeatureGrid({ items }: FeatureGridProps) {
             <h3 className="m-h3">{item.title}</h3>
             <p className="m-body">{item.body}</p>
             <FeatureLink link={item.link} />
-          </StaggerItem>
+          </article>
         );
       })}
-    </Stagger>
+    </Reveal>
   );
 }

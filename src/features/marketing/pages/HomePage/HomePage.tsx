@@ -1,60 +1,65 @@
-import { Activity, GitBranch, LineChart, ScrollText } from "lucide-react";
+import { APP_URLS } from "@/shared/constants/app";
 import { GradientText } from "../../motion/GradientText";
+import { AgentTerminal } from "../../sections/AgentTerminal";
 import { CTA } from "../../sections/CTA";
-import { ComparisonTable } from "../../sections/ComparisonTable";
 import { FeatureGrid } from "../../sections/FeatureGrid";
 import { Hero } from "../../sections/Hero";
 import { LogoStrip } from "../../sections/LogoStrip";
-import { MetricsStrip } from "../../sections/MetricsStrip";
+import { OpenSourceSection } from "../../sections/OpenSourceSection";
 import { SectionHeader } from "../../sections/SectionHeader";
 import { Split } from "../../sections/Split";
-import { ProductMock } from "../../visuals/ProductMock";
 import { DashboardMock } from "../../visuals/DashboardMock";
 import { Screenshot } from "../../visuals/Screenshot";
-import { OpenSourceSection } from "../../sections/OpenSourceSection";
-import { STACK_LOGOS, PILLARS, COMPARE_ROWS } from "./HomePageData";
+import { TerminalWindow } from "../../visuals/TerminalWindow";
+import { PILLARS, STACK_LOGOS } from "./HomePageData";
+
+const HERO_SESSION = `$ optikk services list --from 1h
+
+SERVICE      REQUESTS  ERRORS  AVG ms  P95 ms  P99 ms
+api-gateway  182304    21      38.2    91.4    142.7
+checkout     41889     1743    112.9   840.1   2410.3
+payment-svc  40112     1502    96.5    712.8   1988.4
+inventory    78451     3       22.1    54.9    88.0
+
+$ optikk traces search -q "service:checkout status:error" --from 15m --limit 3
+
+TRACE ID          SERVICE   OPERATION              STATUS  DURATION  SPANS  TIME
+9f3c21ab44d0e817  checkout  POST /api/v2/checkout  error   2.41s     47     14:23:51
+b82fe0c1a9d34771  checkout  POST /api/v2/checkout  error   2.18s     45     14:23:47
+04d7c9ee52b1f3a0  checkout  POST /api/v2/checkout  error   1.97s     44     14:23:40`;
+
+const METRICS_SESSION = `$ optikk metrics query --metric http.server.duration \\
+    --aggregation p99 --group-by service --from 3h
+
+{
+  "series": [
+    { "group": "checkout",
+      "points": [["14:00", 312], ["14:05", 2410], ["14:10", 2395]] },
+    { "group": "api-gateway",
+      "points": [["14:00", 141], ["14:05", 139], ["14:10", 143]] }
+  ]
+}`;
 
 export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="Now in public beta"
+        eyebrow="AI-native observability · now in public beta"
         title={
           <>
-            Observability the way <GradientText>developers actually use it.</GradientText>
+            Observability that lives <GradientText>in your terminal.</GradientText>
           </>
         }
-        subtitle="Unified logs, metrics, and traces with native OpenTelemetry. Instant live tail, intelligent context graphs, and AI SRE on top. Run fully self-hosted in your VPC or private cloud."
-        primaryCta={{ label: "Self-host now", path: "/self-host", variant: "grad" }}
-        secondaryCta={{ label: "Read the docs", path: "/opentelemetry", variant: "secondary" }}
-        meta={["Apache 2.0 licensed", "Kubernetes native", "5-minute setup"]}
-        visual={
-          <Screenshot
-            name="overview"
-            alt="Optikk saturation overview showing Kafka, Database, Redis, and Queues subsystems with a fleet hex-map"
-            eager
-            fallback={<ProductMock />}
-          />
-        }
+        subtitle="Unified logs, metrics, and traces, queryable from the terminal with the optikk CLI, or by Claude Code, Cursor, Codex, and Antigravity investigating incidents for you. OpenTelemetry-native, open source, self-hostable."
+        primaryCta={{ label: "Start free", path: APP_URLS.signup }}
+        secondaryCta={{ label: "Self-host now", path: "/self-host", variant: "secondary" }}
+        meta={["Apache 2.0 licensed", "Built for coding agents", "5-minute setup"]}
+        visual={<TerminalWindow>{HERO_SESSION}</TerminalWindow>}
       />
 
-      <LogoStrip
-        label="Built on / integrates with the stack your platform tenant already runs"
-        items={STACK_LOGOS}
-      />
+      <LogoStrip label="Runs on the stack you already have" items={STACK_LOGOS} />
 
-      <section className="m-section m-section--tight">
-        <div className="m-container">
-          <MetricsStrip
-            metrics={[
-              { value: 10, suffix: "M", label: "spans / second", grad: true },
-              { value: 100, suffix: "%", label: "open source" },
-              { value: 200, prefix: "<", suffix: "ms", label: "p99 query latency" },
-              { value: 15, suffix: "×", label: "telemetry compression" },
-            ]}
-          />
-        </div>
-      </section>
+      <AgentTerminal />
 
       <section className="m-section">
         <div className="m-container">
@@ -65,7 +70,7 @@ export default function HomePage() {
                 Everything in one place, <GradientText>nothing forced into a box.</GradientText>
               </>
             }
-            lede="Optikk is six tools shaped like one: ingest, store, query, alert, explain, and act — unified in a single, high-performance telemetry pipeline."
+            lede="Optikk is six tools shaped like one: ingest, store, query, alert, explain, and act. These are unified in a single, high-performance telemetry pipeline, from your terminal or your agent."
           />
           <FeatureGrid items={PILLARS} />
         </div>
@@ -162,89 +167,23 @@ export default function HomePage() {
               },
             ]}
             link={{ label: "Metrics deep-dive", path: "/features#metrics" }}
-            visual={
-              <Screenshot
-                name="service-detail"
-                alt="Optikk service detail for payment-svc with golden signals and top endpoints"
-                bare
-                fallback={<DashboardMock type="metrics" />}
-              />
-            }
+            visual={<TerminalWindow title="~ optikk metrics">{METRICS_SESSION}</TerminalWindow>}
           />
         </div>
       </section>
 
       <OpenSourceSection />
 
-      <section className="m-section">
-        <div className="m-container">
-          <SectionHeader
-            eyebrow="The honest comparison"
-            title={
-              <>
-                Same telemetry. <GradientText>Less lock-in.</GradientText>
-              </>
-            }
-            lede="Datadog and New Relic ship great UIs on proprietary, black-box systems. Optikk gives you a unified, open-source platform that you can run in your own VPC or private cloud, with zero vendor lock-in."
-            align="center"
-          />
-          <ComparisonTable
-            columns={["", "Datadog", "Optikk", "Grafana Cloud", "Elastic"]}
-            rows={COMPARE_ROWS}
-            highlightColumn={2}
-          />
-        </div>
-      </section>
-
-      <section className="m-section m-section--warm">
-        <div className="m-container">
-          <SectionHeader
-            eyebrow="What tenants build with Optikk"
-            title={
-              <>
-                From hobby project to <GradientText>10 million spans / second.</GradientText>
-              </>
-            }
-            align="center"
-          />
-          <FeatureGrid
-            items={[
-              {
-                icon: ScrollText,
-                title: "Incident response loops",
-                body: "Alert fires → Optikk drafts root cause from logs+traces+deploys → engineer pastes verdict in Slack in under 60 seconds.",
-              },
-              {
-                icon: LineChart,
-                title: "SLO programs at series-A scale",
-                body: "Define burn rates, get auto-generated dashboards, and let Optikk page only when the budget actually erodes.",
-              },
-              {
-                icon: GitBranch,
-                title: "Deploy-aware rollouts",
-                body: "Every deploy is annotated across every signal. Bisect a regression to a commit in two clicks.",
-              },
-              {
-                icon: Activity,
-                title: "LLM observability",
-                body: "Trace prompt → model → tool calls → response. See cost, latency, and quality the same way you see HTTP.",
-              },
-            ]}
-          />
-        </div>
-      </section>
-
       <CTA
         eyebrow="Get started"
         title={
           <>
-            Wire OpenTelemetry once.{" "}
-            <span style={{ color: "#fdba74" }}>Never re-do observability again.</span>
+            One curl command. <GradientText>That's the setup.</GradientText>
           </>
         }
-        subtitle="Optikk is fully open source under the Apache 2.0 license. Bring your OTel collector. Bring your tenant. Ship faster on Monday."
-        primary={{ label: "Self-host now", path: "/self-host" }}
-        secondary={{ label: "Read the docs", path: "/opentelemetry", variant: "secondary" }}
+        subtitle="curl -fsSL https://optikk.in/install.sh | sh then optikk onboard prints the OTLP endpoint and API key for your collector."
+        primary={{ label: "Start free", path: APP_URLS.signup }}
+        secondary={{ label: "Read the CLI docs", path: "/cli", variant: "secondary" }}
       />
     </>
   );

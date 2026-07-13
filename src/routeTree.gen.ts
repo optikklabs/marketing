@@ -18,6 +18,7 @@ import { Route as MarketingPrivacyRouteImport } from './routes/_marketing/privac
 import { Route as MarketingPricingRouteImport } from './routes/_marketing/pricing'
 import { Route as MarketingOpentelemetryRouteImport } from './routes/_marketing/opentelemetry'
 import { Route as MarketingFeaturesRouteImport } from './routes/_marketing/features'
+import { Route as MarketingCliRouteImport } from './routes/_marketing/cli'
 import { Route as MarketingArchitectureRouteImport } from './routes/_marketing/architecture'
 
 const MarketingRoute = MarketingRouteImport.update({
@@ -64,6 +65,11 @@ const MarketingFeaturesRoute = MarketingFeaturesRouteImport.update({
   path: '/features',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingCliRoute = MarketingCliRouteImport.update({
+  id: '/cli',
+  path: '/cli',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const MarketingArchitectureRoute = MarketingArchitectureRouteImport.update({
   id: '/architecture',
   path: '/architecture',
@@ -73,6 +79,7 @@ const MarketingArchitectureRoute = MarketingArchitectureRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/architecture': typeof MarketingArchitectureRoute
+  '/cli': typeof MarketingCliRoute
   '/features': typeof MarketingFeaturesRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/architecture': typeof MarketingArchitectureRoute
+  '/cli': typeof MarketingCliRoute
   '/features': typeof MarketingFeaturesRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_marketing': typeof MarketingRouteWithChildren
   '/_marketing/architecture': typeof MarketingArchitectureRoute
+  '/_marketing/cli': typeof MarketingCliRoute
   '/_marketing/features': typeof MarketingFeaturesRoute
   '/_marketing/opentelemetry': typeof MarketingOpentelemetryRoute
   '/_marketing/pricing': typeof MarketingPricingRoute
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/architecture'
+    | '/cli'
     | '/features'
     | '/opentelemetry'
     | '/pricing'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/architecture'
+    | '/cli'
     | '/features'
     | '/opentelemetry'
     | '/pricing'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_marketing'
     | '/_marketing/architecture'
+    | '/_marketing/cli'
     | '/_marketing/features'
     | '/_marketing/opentelemetry'
     | '/_marketing/pricing'
@@ -211,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingFeaturesRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/cli': {
+      id: '/_marketing/cli'
+      path: '/cli'
+      fullPath: '/cli'
+      preLoaderRoute: typeof MarketingCliRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/architecture': {
       id: '/_marketing/architecture'
       path: '/architecture'
@@ -223,6 +242,7 @@ declare module '@tanstack/react-router' {
 
 interface MarketingRouteChildren {
   MarketingArchitectureRoute: typeof MarketingArchitectureRoute
+  MarketingCliRoute: typeof MarketingCliRoute
   MarketingFeaturesRoute: typeof MarketingFeaturesRoute
   MarketingOpentelemetryRoute: typeof MarketingOpentelemetryRoute
   MarketingPricingRoute: typeof MarketingPricingRoute
@@ -235,6 +255,7 @@ interface MarketingRouteChildren {
 
 const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingArchitectureRoute: MarketingArchitectureRoute,
+  MarketingCliRoute: MarketingCliRoute,
   MarketingFeaturesRoute: MarketingFeaturesRoute,
   MarketingOpentelemetryRoute: MarketingOpentelemetryRoute,
   MarketingPricingRoute: MarketingPricingRoute,

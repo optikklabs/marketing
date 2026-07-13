@@ -2,7 +2,6 @@ import { Bot, Cloud, Database, GitBranch, HardDrive, Network, Server, Zap } from
 
 import { GradientText } from "../../motion/GradientText";
 import { Reveal } from "../../motion/Reveal";
-import { Stagger, StaggerItem } from "../../motion/Stagger";
 import { CTA } from "../../sections/CTA";
 import { CodeBlock } from "../../sections/CodeBlock";
 import { Hero } from "../../sections/Hero";
@@ -59,7 +58,7 @@ const LAYERS = [
     name: "API + apps",
     label: "Layer 08",
     icon: Server,
-    body: "GraphQL + REST + WebSocket. Web UI, terminal client, IDE plugins, Slack/Tenants bots — all on the same API.",
+    body: "GraphQL + REST + WebSocket. Web UI, terminal client, IDE plugins, Slack/Tenants bots are all on the same API.",
   },
 ];
 
@@ -115,7 +114,7 @@ export default function ArchitecturePage() {
                 ClickHouse, <GradientText>tuned for telemetry.</GradientText>
               </>
             }
-            body="A sharded ClickHouse cluster is the heart of Optikk. We pre-build projection indexes for the queries observability tools actually run — group-by service, percentile, top-k, time-bucketed — so even on weeks of data, p99 query latency stays under 200ms."
+            body="A sharded ClickHouse cluster is the heart of Optikk. We pre-build projection indexes for the queries observability tools actually run (group-by service, percentile, top-k, time-bucketed) so even on weeks of data, p99 query latency stays under 200ms."
             list={[
               {
                 title: "Vectorized SIMD scans",
@@ -259,9 +258,9 @@ SUBSCRIBE livetail:tenant:acme:logs:service=checkout,level=ERROR
 # Producer (Kafka consumer) publishes filtered events
 PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
   "ts": "2026-05-19T14:02:13.412Z",
-  "service": "checkout-api",
+  "service": "payment-svc",
   "level": "ERROR",
-  "message": "db pool exhausted (32/32)"
+  "message": "Lock wait timeout exceeded; try restarting transaction"
 }`,
                   },
                 ]}
@@ -283,30 +282,30 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
             lede="Every layer of the architecture shows up as a first-class view. No grafana sprawl, no separate Kafka UI to bookmark."
             align="center"
           />
-          <Stagger className="m-bento" gap={0.12}>
-            <StaggerItem as="article" className="is-wide m-bento-card">
+          <Reveal className="m-bento">
+            <article className="is-wide m-bento-card">
               <h3 className="m-h3">Database saturation</h3>
               <p className="m-body-sm">
-                Query throughput, percentile latency, replication lag, deadlocks — keyed to the
+                Query throughput, percentile latency, replication lag, and deadlocks are keyed to the
                 ClickHouse + MySQL layers.
               </p>
               <Screenshot
                 name="database"
                 alt="Database saturation dashboard with QPS, p99 latency, and replication lag"
               />
-            </StaggerItem>
-            <StaggerItem as="article" className="is-wide m-bento-card">
+            </article>
+            <article className="is-wide m-bento-card">
               <h3 className="m-h3">Kafka broker fleet</h3>
               <p className="m-body-sm">
-                Per-broker throughput, ISR shrinks, under-replicated partitions, consumer lag — the
+                Per-broker throughput, ISR shrinks, under-replicated partitions, and consumer lag are the
                 full Kafka SRE surface.
               </p>
               <Screenshot
                 name="kafka"
                 alt="Kafka cluster dashboard with broker fleet heatmap and consumer lag chart"
               />
-            </StaggerItem>
-            <StaggerItem as="article" className="is-wide m-bento-card">
+            </article>
+            <article className="is-wide m-bento-card">
               <h3 className="m-h3">Service catalog</h3>
               <p className="m-body-sm">
                 Every service the API + apps layer exposes, with golden signals and SLO burn at a
@@ -316,19 +315,19 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
                 name="services"
                 alt="Service catalog listing 15 services with request rate, error %, and p99 latency"
               />
-            </StaggerItem>
-            <StaggerItem as="article" className="is-wide m-bento-card">
+            </article>
+            <article className="is-wide m-bento-card">
               <h3 className="m-h3">Service detail</h3>
               <p className="m-body-sm">
-                Drill into one service — requests, errors, latency, top endpoints, top exceptions.
+                Drill into one service to see requests, errors, latency, top endpoints, and top exceptions.
                 One click from any alert.
               </p>
               <Screenshot
                 name="service-detail"
                 alt="Service detail view for payment-svc with golden signals and top endpoints table"
               />
-            </StaggerItem>
-          </Stagger>
+            </article>
+          </Reveal>
         </div>
       </section>
 

@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 
-
 import { Reveal } from "../motion/Reveal";
 
 interface CtaAction {
@@ -30,7 +29,7 @@ function CtaLink({ cta }: { readonly cta: CtaAction }) {
     );
   }
   return (
-    <Link to={(cta.path as string & {})} className={className}>
+    <Link to={cta.path as string & {}} className={className}>
       {cta.label}
       <ArrowRight size={16} />
     </Link>

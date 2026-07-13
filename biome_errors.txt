@@ -1,0 +1,11 @@
+yarn run v1.22.22
+$ biome check .
+Skipped 7 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --fix --unsafe
+
+The number of diagnostics exceeds the number allowed by Biome.
+Diagnostics not shown: 33.
+Checked 179 files in 26ms. No fixes applied.
+Found 45 errors.
+Found 8 warnings.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

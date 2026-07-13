@@ -7,6 +7,7 @@ export const ROUTES = {
   features: "/features",
   architecture: "/architecture",
   pricing: "/pricing",
+  cli: "/cli",
   opentelemetry: "/opentelemetry",
   selfHost: "/self-host",
   privacy: "/privacy",

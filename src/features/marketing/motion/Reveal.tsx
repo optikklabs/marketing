@@ -9,7 +9,7 @@ interface RevealProps {
   readonly as?: "div" | "section" | "header" | "li" | "article" | "span";
 }
 
-export function Reveal({ children, delay = 0, y = 24, className, as = "div" }: RevealProps) {
+export function Reveal({ children, delay = 0, y = 10, className, as = "div" }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
 
   if (prefersReducedMotion) {
@@ -26,7 +26,7 @@ export function Reveal({ children, delay = 0, y = 24, className, as = "div" }: R
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{
-        duration: 0.7,
+        duration: 0.5,
         delay,
         ease: [0.2, 0.7, 0.1, 1],
       }}

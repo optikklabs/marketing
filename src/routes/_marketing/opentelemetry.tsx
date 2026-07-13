@@ -6,8 +6,5 @@ const OpenTelemetryPageLazy = lazy(
 );
 
 export const Route = createFileRoute("/_marketing/opentelemetry")({
-  component: () => (
-      <OpenTelemetryPageLazy />
-
-  ),
+  component: () => <OpenTelemetryPageLazy />,
 });

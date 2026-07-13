@@ -3,7 +3,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 
-
 const LEGAL_PAGES = [
   { key: "privacy", label: "Privacy Policy", to: "/privacy" },
   { key: "terms", label: "Terms of Service", to: "/terms" },
@@ -40,7 +39,7 @@ function LegalSidebar({ currentKey }: { readonly currentKey: LegalKey }) {
         return (
           <Link
             key={page.key}
-            to={(page.to as string & {})}
+            to={page.to as string & {}}
             className={`${SIDEBAR_LINK_BASE} ${isActive ? SIDEBAR_LINK_ACTIVE : SIDEBAR_LINK_INACTIVE}`}
           >
             {page.label}
@@ -59,7 +58,10 @@ function LegalPaging({ currentKey }: { readonly currentKey: LegalKey }) {
   return (
     <div className="mt-14 flex items-center justify-between gap-4 border-[var(--border-color)] border-t pt-8">
       {prevPage ? (
-        <Link to={(prevPage.to as string & {})} className={`${PAGING_BTN_BASE} items-start text-left`}>
+        <Link
+          to={prevPage.to as string & {}}
+          className={`${PAGING_BTN_BASE} items-start text-left`}
+        >
           <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-[0.05em]">
             Previous
           </span>
@@ -73,7 +75,7 @@ function LegalPaging({ currentKey }: { readonly currentKey: LegalKey }) {
       )}
 
       {nextPage ? (
-        <Link to={(nextPage.to as string & {})} className={`${PAGING_BTN_BASE} items-end text-right`}>
+        <Link to={nextPage.to as string & {}} className={`${PAGING_BTN_BASE} items-end text-right`}>
           <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-[0.05em]">
             Next
           </span>

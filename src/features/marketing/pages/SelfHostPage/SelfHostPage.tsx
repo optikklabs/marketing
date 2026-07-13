@@ -1,11 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Check, Database, Layers, ServerCog, ShieldCheck, Terminal } from "lucide-react";
 
-
 import { OSS } from "../../constants";
 import { GradientText } from "../../motion/GradientText";
 import { Reveal } from "../../motion/Reveal";
-import { Stagger, StaggerItem } from "../../motion/Stagger";
 import { CTA } from "../../sections/CTA";
 import { CodeBlock } from "../../sections/CodeBlock";
 import { FAQ } from "../../sections/FAQ";
@@ -80,7 +78,17 @@ const FAQS = [
   {
     question: "Do you offer commercial support?",
     answer:
-      "Optikk is 100% open source under the Apache 2.0 license. We do not offer paid commercial support plans or proprietary add-ons. All features, databases, and setups are fully available to the community for free.",
+      "The self-hosted platform is 100% open source under the Apache 2.0 license with no proprietary add-ons. All features, databases, and setups are fully available to the community for free. If you'd rather not operate it yourself, Managed Optikk runs the same platform for you with usage-based pricing.",
+  },
+  {
+    question: "Is there a hosted version?",
+    answer: (
+      <>
+        Yes, Managed Optikk is the exact same open-source platform, hosted and operated by us. You
+        pay only for what you ingest: $0.05/GB logs, $0.06/GB traces, $0.001/DPM metrics. See{" "}
+        <Link to={"/pricing" as string & {}}>pricing</Link> for details.
+      </>
+    ),
   },
   {
     question: "How big does the Kubernetes cluster need to be?",
@@ -120,11 +128,10 @@ export default function SelfHostPage() {
 
       <section className="m-section m-section--tight">
         <div className="m-container">
-          <Stagger className="m-deploy-grid">
+          <Reveal className="m-deploy-grid">
             {MODES.map((mode) => (
-              <StaggerItem
+              <article
                 key={mode.name}
-                as="article"
                 className={`m-deploy-card${mode.featured ? " is-featured" : ""}`}
               >
                 <span className="m-bento-icon">
@@ -151,15 +158,15 @@ export default function SelfHostPage() {
                   </a>
                 ) : (
                   <Link
-                    to={(mode.cta.path as string & {})}
+                    to={mode.cta.path as string & {}}
                     className={`m-btn ${mode.featured ? "m-btn-primary" : "m-btn-secondary"}`}
                   >
                     {mode.cta.label}
                   </Link>
                 )}
-              </StaggerItem>
+              </article>
             ))}
-          </Stagger>
+          </Reveal>
         </div>
       </section>
 
@@ -188,7 +195,7 @@ export default function SelfHostPage() {
                   Install in one command. <GradientText>Customize the rest in YAML.</GradientText>
                 </>
               }
-              lede="One Helm chart bundles Kafka, ClickHouse, MySQL, and Redis. Point it at a Kubernetes cluster — the chart handles the rest, including rolling upgrades."
+              lede="One Helm chart bundles Kafka, ClickHouse, MySQL, and Redis. Point it at a Kubernetes cluster and the chart handles the rest, including rolling upgrades."
               align="left"
             />
           </Reveal>

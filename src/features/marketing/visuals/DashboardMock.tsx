@@ -1,7 +1,7 @@
 import { Histogram } from "./Histogram";
 import { LogLine } from "./LogLine";
-import { Span } from "./Span";
 import { MetricCard } from "./MetricCard";
+import { Span } from "./Span";
 
 interface DashboardMockProps {
   readonly title?: string;
@@ -42,27 +42,27 @@ export function DashboardMock({ title, type = "logs" }: DashboardMockProps) {
             <LogLine
               ts="14:02:13.412"
               level="ERR"
-              svc="checkout-api"
-              msg="db pool exhausted (32/32)"
+              svc="payment-svc"
+              msg="Lock wait timeout exceeded; try restarting transaction"
             />
             <LogLine
               ts="14:02:13.487"
               level="ERR"
               svc="checkout-api"
-              msg="connection refused: postgres:5432"
+              msg="mysql: lock acquired after 2 retries (txn queued)"
             />
             <LogLine
               ts="14:02:13.512"
               level="WARN"
               svc="payments"
-              msg="retry attempt 3 of 5 — gateway timeout"
+              msg="retry attempt 3 of 5: gateway timeout"
             />
             <LogLine ts="14:02:13.601" level="INFO" svc="auth" msg="token issued sub=u_12af" />
             <LogLine
               ts="14:02:13.692"
               level="ERR"
               svc="checkout-api"
-              msg="rolling back txn 8af14b — pool wait timeout"
+              msg="rolling back txn 8af14b due to lock wait timeout"
             />
             <LogLine
               ts="14:02:13.748"
@@ -83,7 +83,7 @@ export function DashboardMock({ title, type = "logs" }: DashboardMockProps) {
           <i />
           <i />
           <i />
-          <span>{title ?? "optikk.dev / traces / 4af09c..."}</span>
+          <span>{title ?? "optikk.dev / traces / 9f3c21ab..."}</span>
         </div>
         <div style={{ padding: 22 }}>
           <div
@@ -96,7 +96,7 @@ export function DashboardMock({ title, type = "logs" }: DashboardMockProps) {
               marginBottom: 18,
             }}
           >
-            <span>trace_id=4af09c2b</span>
+            <span>trace_id=9f3c21ab</span>
             <span>·</span>
             <span style={{ color: "#34d399" }}>4 services</span>
             <span>·</span>
@@ -110,10 +110,10 @@ export function DashboardMock({ title, type = "logs" }: DashboardMockProps) {
             offset={4}
             color="#0d9488"
           />
-          <Span name="db.query users" service="postgres" width={18} offset={10} color="#a78bfa" />
+          <Span name="db.query users" service="mysql" width={18} offset={10} color="#a78bfa" />
           <Span
             name="db.query orders"
-            service="postgres"
+            service="mysql"
             width={68}
             offset={28}
             color="#f97316"
@@ -146,7 +146,7 @@ export function DashboardMock({ title, type = "logs" }: DashboardMockProps) {
         <MetricCard label="checkout.requests" value="128.4k" delta="+12%" color="#0d9488" />
         <MetricCard label="checkout.p99" value="218ms" delta="-8%" color="#34d399" />
         <MetricCard label="payments.errors" value="0.42%" delta="+0.1%" color="#f97316" warn />
-        <MetricCard label="db.pool.saturation" value="98%" delta="critical" color="#f87171" err />
+        <MetricCard label="mysql.lock.waits" value="312/min" delta="critical" color="#f87171" err />
       </div>
     </div>
   );

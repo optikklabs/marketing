@@ -9,7 +9,6 @@ import {
   normalizeApiPayload,
 } from "../utils/decode";
 import { resolveApiBaseURL } from "./baseUrl";
-import { attachAuthInterceptor } from "./interceptors/authInterceptor";
 import { attachErrorInterceptor } from "./interceptors/errorInterceptor";
 
 const axiosClient = axios.create({
@@ -21,7 +20,6 @@ const axiosClient = axios.create({
   withCredentials: true,
 });
 
-attachAuthInterceptor(axiosClient);
 axiosClient.interceptors.response.use((response) => {
   const normalized = normalizeApiPayload(response.data);
 

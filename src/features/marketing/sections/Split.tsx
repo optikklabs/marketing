@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import type { ReactNode } from "react";
 
-
 import { Reveal } from "../motion/Reveal";
 
 interface SplitListItem {
@@ -54,7 +53,7 @@ export function Split({ eyebrow, title, body, list, link, visual, reverse, id }:
               {link.label} <ArrowRight size={14} />
             </a>
           ) : (
-            <Link className="m-btn m-btn-secondary m-btn-sm" to={(link.path as string & {})}>
+            <Link className="m-btn m-btn-secondary m-btn-sm" to={link.path as string & {}}>
               {link.label} <ArrowRight size={14} />
             </Link>
           )

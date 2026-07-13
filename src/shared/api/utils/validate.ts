@@ -28,7 +28,7 @@ export function validateResponse<TSchema extends z.ZodTypeAny>(
         i.code === "unrecognized_keys" ? (i as unknown as { keys: string[] }).keys : []
       );
       console.warn(
-        "[validateResponse] API contract drift — backend returned unknown keys. Stripping and retrying.",
+        "[validateResponse] API contract drift - backend returned unknown keys. Stripping and retrying.",
         { unknownKeys }
       );
     }

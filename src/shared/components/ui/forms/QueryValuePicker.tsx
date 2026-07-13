@@ -27,7 +27,7 @@ export default function QueryValuePicker({
       <div className="flex items-center gap-1.5 border-border border-b px-3.5 pt-[10px] pb-2 text-[11px] text-muted-foreground tracking-[0.04em]">
         <span className="w-5 shrink-0 text-center text-[14px]">{pendingField.icon}</span>
         <strong>{pendingField.label}</strong>
-        <span className="ml-1 text-muted-foreground">— select value</span>
+        <span className="ml-1 text-muted-foreground">- select value</span>
       </div>
       {filteredHints.map((hint) => (
         <div

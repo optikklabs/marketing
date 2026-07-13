@@ -1,4 +1,4 @@
-# Optikk Frontend — Codebase Index
+# Optikk Frontend - Codebase Index
 
 Orientation for [optikk-frontend](.). This index is aligned to the current repo shape, route wiring, and development conventions.
 
@@ -60,7 +60,7 @@ Orientation for [optikk-frontend](.). This index is aligned to the current repo 
 | **Monitors** | `monitors/` | `/monitors`, `/monitors/new`, `/monitors/$monitorId`, `/monitors/$monitorId/edit`, `/monitors/notifications` | Alerting system UI. Supports metric, APM, and log monitor types. 5-step monitor builder wizard. Detail page features hand-rolled SVG eval chart. Outbound integration supports Slack webhooks. Entry: [pages/MonitorsPage/MonitorsPage.tsx](src/features/monitors/pages/MonitorsPage/MonitorsPage.tsx). |
 | **Settings** | `settings/` | `/settings` | Profiles, team members management, and user preference controls. |
 | **Marketing** | `marketing/` | `/`, `/features`, `/pricing`, `/opentelemetry`, `/self-host`, `/architecture`, `/privacy`, `/terms`, `/security` | Public-facing site marketing pages. STAR count fetched via GitHub API wrapper. |
-| **Explorer** | `explorer/` | — | Shared explorer utilities, DSL input parser (`ExplorerSearchBarDsl`), facets, visualizations, and trend chart primitives used by logs/traces/metrics. |
+| **Explorer** | `explorer/` | - | Shared explorer utilities, DSL input parser (`ExplorerSearchBarDsl`), facets, visualizations, and trend chart primitives used by logs/traces/metrics. |
 
 ---
 

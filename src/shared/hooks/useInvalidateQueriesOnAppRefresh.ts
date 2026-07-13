@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 /**
  * When `refreshKey` bumps (manual/auto refresh), invalidates queries under `[scope, tenantId]`
- * so they refetch without putting `refreshKey` in each query key — avoids a new cache entry
+ * so they refetch without putting `refreshKey` in each query key - avoids a new cache entry
  * and loading flash on every interval.
  */
 export function useInvalidateQueriesOnAppRefresh(

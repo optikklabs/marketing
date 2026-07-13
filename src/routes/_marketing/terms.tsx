@@ -6,8 +6,5 @@ const TermsOfServicePageLazy = lazy(
 );
 
 export const Route = createFileRoute("/_marketing/terms")({
-  component: () => (
-      <TermsOfServicePageLazy />
-
-  ),
+  component: () => <TermsOfServicePageLazy />,
 });

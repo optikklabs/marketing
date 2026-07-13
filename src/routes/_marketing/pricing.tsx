@@ -1,8 +1,8 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { ROUTES } from "@/shared/constants/routes";
+import { createFileRoute } from "@tanstack/react-router";
+import { lazy } from "react";
+
+const PricingPageLazy = lazy(() => import("@/features/marketing/pages/PricingPage/PricingPage"));
 
 export const Route = createFileRoute("/_marketing/pricing")({
-  loader: () => {
-    throw redirect({ to: ROUTES.selfHost, replace: true });
-  },
+  component: () => <PricingPageLazy />,
 });

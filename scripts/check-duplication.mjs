@@ -27,7 +27,7 @@ for (const file of files) {
     const m = line.match(GUARDED);
     if (m) {
       console.error(
-        `${file}:${i + 1} defines ${m[1]} — import it from @shared/utils/formatters instead`
+        `${file}:${i + 1} defines ${m[1]} - import it from @shared/utils/formatters instead`
       );
       failed = true;
     }

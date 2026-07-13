@@ -10,7 +10,9 @@ const FOOTER_GROUPS = [
     title: "Product",
     links: [
       { label: "Platform", path: "/features" },
-      { label: "Architecture", path: "/architecture" },
+      { label: "CLI", path: "/cli" },
+      { label: "Pricing", path: "/pricing" },
+      { label: "How it works", path: "/how-it-works" },
       { label: "Self-host", path: "/self-host" },
     ],
   },
@@ -56,7 +58,7 @@ function FooterLink({ label, path }: { readonly label: string; readonly path: st
       </a>
     );
   }
-  return <Link to={(path as string & {})}>{label}</Link>;
+  return <Link to={path as string & {}}>{label}</Link>;
 }
 
 export function Footer() {
@@ -64,7 +66,7 @@ export function Footer() {
     <footer className="m-footer">
       <div className="m-container m-footer-grid">
         <div className="m-footer-brand">
-          <Link to={("/" as string & {})} className="m-brand" aria-label="Optikk home">
+          <Link to={"/" as string & {}} className="m-brand" aria-label="Optikk home">
             <OptikkLogo size={28} />
             <span>Optikk</span>
           </Link>

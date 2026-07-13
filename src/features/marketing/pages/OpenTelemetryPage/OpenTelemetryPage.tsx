@@ -136,7 +136,7 @@ export default function OpenTelemetryPage() {
                 Three lines of config. <GradientText>One restart.</GradientText>
               </>
             }
-            lede="Wire the OTel Collector exporter to our endpoint. Existing pipelines keep working — Optikk is just one more exporter target."
+            lede="Wire the OTel Collector exporter to our endpoint. Existing pipelines keep working, and Optikk is just one more exporter target."
           />
           <CodeBlock
             tabs={[

@@ -1,4 +1,4 @@
-# Optikk Frontend — Codebase Index
+# Optikk Frontend - Codebase Index
 
 Orientation for [optikk-frontend](.). This index is aligned to the current repo shape, route wiring, and development conventions.
 
@@ -60,8 +60,8 @@ Orientation for [optikk-frontend](.). This index is aligned to the current repo 
 | **Monitors** | `monitors/` | `/monitors`, `/monitors/new`, `/monitors/$monitorId`, `/monitors/$monitorId/edit`, `/monitors/notifications` | Alerting system UI. Supports metric, APM, and log monitor types. 5-step monitor builder wizard. Detail page features hand-rolled SVG eval chart. Outbound integration supports Slack webhooks. Entry: [pages/MonitorsPage/MonitorsPage.tsx](src/features/monitors/pages/MonitorsPage/MonitorsPage.tsx). |
 | **Settings** | `settings/` | `/settings` | Profiles, team members management, and user preference controls. |
 | **Onboarding** | `onboarding/` | `/welcome` | Post-signup page (in `app/auth/pages/WelcomePage`) showing the tenant API key + OTLP endpoint + collector-config snippet tabs. Feature folder holds `TrialBanner` (days-left banner in `MainLayout`), `otlpEndpoint.ts`, and the transient signup-key handoff (`shared/api/auth/apiKeyHandoff.ts`). |
-| **Marketing** | `marketing/` | `/`, `/features`, `/pricing`, `/opentelemetry`, `/self-host`, `/architecture`, `/privacy`, `/terms`, `/security` | Public-facing site marketing pages. STAR count fetched via GitHub API wrapper. |
-| **Explorer** | `explorer/` | — | Shared explorer utilities, DSL input parser (`ExplorerSearchBarDsl`), facets, visualizations, and trend chart primitives used by logs/traces/metrics. |
+| **Marketing** | `marketing/` | `/`, `/features`, `/pricing`, `/cli`, `/opentelemetry`, `/self-host`, `/architecture`, `/privacy`, `/terms`, `/security` | Public-facing site marketing pages, positioned as AI-native, terminal-first observability. Datadog-style motion restraint: the only animation is a one-time `motion/Reveal` fade (10px, 0.5s); `GradientText` is a static gradient; no marquee/count-ups/tilt/stagger. CLI sessions render in `visuals/TerminalWindow.tsx` (homepage hero + both metrics splits); mock incident data is unified on one story (MySQL lock-wait in payment-svc after deploy `abc12d`, trace `9f3c21ab`). Homepage is 7 sections + CTA (Hero, LogoStrip static row, AgentTerminal, platform bento, 3 splits, OpenSource, CTA). STAR count fetched via GitHub API wrapper. `/pricing` (PricingPage) shows managed usage rates ($0.05/GB logs, $0.06/GB traces, $0.001/DPM metrics) beside the free self-host card; `/cli` (CliPage) documents the `optikk` CLI with realistic command+output examples (data in `CliPageData.ts` - keep in sync with the CLI repo's `cmd/`); install is curl-only (`curl -fsSL https://optikk.in/install.sh | sh` - firebase.json redirects `/install.sh` to the raw `optikk/install.sh` on GitHub). |
+| **Explorer** | `explorer/` | - | Shared explorer utilities, DSL input parser (`ExplorerSearchBarDsl`), facets, visualizations, and trend chart primitives used by logs/traces/metrics. |
 
 ---
 
@@ -73,7 +73,7 @@ Orientation for [optikk-frontend](.). This index is aligned to the current repo 
 | **Components** | `components/` | Reusable UI primitives (`primitives/`), table wrappers (`table/`), custom chart modules (`ui/charts/` including `uPlot` setups, micro charts, and uplot helpers), and dashboard layouts. |
 | **Entities** | `entities/` | System-wide TS declarations for metrics, logs, traces, users, and deployments. |
 | **Hooks** | `hooks/` | Standard React hooks: `useStandardQuery` for TanStack query defaults, `useVisibilityInterval` for tab-hidden updates, and `useSocketStream` for WebSockets. |
-| **Constants** | `constants/` | Global routes mapping ([src/shared/constants/routes.ts](src/shared/constants/routes.ts)) and health alert thresholds. |
+| **Constants** | `constants/` | Global routes mapping ([src/shared/constants/routes.ts](src/shared/constants/routes.ts)), absolute web-app URLs for auth handoff ([src/shared/constants/app.ts](src/shared/constants/app.ts)), and health alert thresholds. |
 | **Utils** | `utils/` | Shared helper scripts: `formatters.ts` (number/duration formatters), `navigation.ts` (TanStack casts), and time range helpers. |
 
 ---

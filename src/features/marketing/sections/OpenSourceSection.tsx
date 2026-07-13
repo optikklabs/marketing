@@ -20,7 +20,7 @@ export function OpenSourceSection() {
           lede={
             <span style={{ color: "#c0cee0" }}>
               The engine, the OTel collector build, the language SDKs, and the Helm chart all live
-              on GitHub. Self-host runs the same binaries Cloud does — no proprietary fork, no
+              on GitHub. Self-host runs the same binaries Cloud does with no proprietary fork, no
               closed core.
             </span>
           }
@@ -88,8 +88,7 @@ export function OpenSourceSection() {
               Distributed Go scheduling engine for alerting pipelines and tasks orchestration.
             </p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.scheduler || 0)} · Apache
-              2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.scheduler || 0)} · Apache 2.0
             </div>
           </a>
           <a
@@ -107,8 +106,8 @@ export function OpenSourceSection() {
               Astronomy Shop microservices demonstration instrumented with OpenTelemetry.
             </p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars["opentelemetry-demo"] || 0)}{" "}
-              · Apache 2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars["opentelemetry-demo"] || 0)} ·
+              Apache 2.0
             </div>
           </a>
         </div>

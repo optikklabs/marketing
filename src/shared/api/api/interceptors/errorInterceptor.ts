@@ -1,12 +1,11 @@
 import axios from "axios";
 
-import type { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import type { AxiosError, AxiosInstance } from "axios";
 
 import { NETWORK_ERROR, UNKNOWN_ERROR } from "@/shared/constants/errorCodes";
 
 import type { ErrorCode } from "@/shared/constants/errorCodes";
 
-import { session } from "@shared/api/auth/session";
 import { toApiErrorShape } from "@shared/api/utils/errorNormalization";
 import type { ApiErrorShape } from "@shared/api/utils/errorNormalization";
 
@@ -85,12 +84,6 @@ function normalizeError(error: unknown): ApiErrorShape {
   return toApiErrorShape(error);
 }
 
-type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
-
-function isAuthEndpoint(url: string | undefined): boolean {
-  return Boolean(url?.includes("/v1/auth/login") || url?.includes("/v1/auth/refresh"));
-}
-
 /**
  *
  */
@@ -98,17 +91,6 @@ export function attachErrorInterceptor(instance: AxiosInstance): number {
   return instance.interceptors.response.use(
     (response) => response,
     async (error: unknown) => {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        const config = error.config as RetriableConfig | undefined;
-        if (config && !config._retried && !isAuthEndpoint(config.url)) {
-          const token = await session.refreshAccessToken();
-          if (token != null) {
-            config._retried = true;
-            return instance.request(config);
-          }
-        }
-      }
-
       const normalized = normalizeError(error);
       console.error("[API Error]", {
         status: normalized.status,

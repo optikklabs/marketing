@@ -1,4 +1,4 @@
-/* Theme color tokens — light is the default (:root); dark applies on [data-theme="dark"].
+/* Theme color tokens - light is the default (:root); dark applies on [data-theme="dark"].
  * Every theme-variant color token is defined in BOTH blocks. Cool-neutral neutrals + per-theme
  * accent tuning keep the two themes consistent (Datadog-aligned schema). */
 :root {
