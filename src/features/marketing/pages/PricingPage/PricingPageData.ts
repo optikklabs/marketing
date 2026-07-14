@@ -1,7 +1,7 @@
 export const MANAGED_RATES = [
-  { signal: "Logs", price: "$0.05", unit: "per GB ingested" },
-  { signal: "Traces", price: "$0.06", unit: "per GB ingested" },
-  { signal: "Metrics", price: "$0.001", unit: "per DPM" },
+  { signal: "Logs", price: "$0.10", unit: "per GB ingested" },
+  { signal: "Traces", price: "$0.10", unit: "per GB ingested" },
+  { signal: "Metrics", price: "$0.008", unit: "per DPM" },
 ] as const;
 
 export const PRICING_FAQS = [
@@ -13,7 +13,7 @@ export const PRICING_FAQS = [
   {
     question: "What is a DPM?",
     answer:
-      "A data point per minute: one active metric time series reporting once a minute. A gauge with 10 label combinations reporting every 60 seconds is 10 DPM, billed at $0.001 per DPM per month.",
+      "A data point per minute: one active metric time series reporting once a minute. A gauge with 10 label combinations reporting every 60 seconds is 10 DPM, billed at $0.008 per DPM per month.",
   },
   {
     question: "Is self-hosting really free?",
@@ -28,6 +28,6 @@ export const PRICING_FAQS = [
   {
     question: "Do you offer volume or enterprise pricing?",
     answer:
-      "Yes. For sustained high volumes, custom retention, or dedicated deployments, contact us at ramantayal12@gmail.com and we'll put together a quote.",
+      "Yes. For sustained high volumes, custom retention, or dedicated deployments, contact us at support@optikk.in and we'll put together a quote.",
   },
 ] as const;

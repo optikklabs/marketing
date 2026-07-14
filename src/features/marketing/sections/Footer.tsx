@@ -38,9 +38,11 @@ const FOOTER_GROUPS = [
   {
     title: "Company",
     links: [
-      { label: "Contact", path: "mailto:ramantayal12@gmail.com" },
+      { label: "Support", path: "/support" },
+      { label: "Contact", path: "mailto:support@optikk.in" },
       { label: "Privacy", path: "/privacy" },
       { label: "Terms", path: "/terms" },
+      { label: "DPA", path: "/dpa" },
       { label: "Security", path: "/security" },
     ],
   },

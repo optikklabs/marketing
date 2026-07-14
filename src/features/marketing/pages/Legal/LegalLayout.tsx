@@ -6,10 +6,11 @@ import { useEffect } from "react";
 const LEGAL_PAGES = [
   { key: "privacy", label: "Privacy Policy", to: "/privacy" },
   { key: "terms", label: "Terms of Service", to: "/terms" },
+  { key: "dpa", label: "Data Processing Addendum", to: "/dpa" },
   { key: "security", label: "Security Statement", to: "/security" },
 ] as const;
 
-type LegalKey = "privacy" | "terms" | "security";
+type LegalKey = "privacy" | "terms" | "dpa" | "security";
 
 interface LegalLayoutProps {
   readonly currentKey: LegalKey;

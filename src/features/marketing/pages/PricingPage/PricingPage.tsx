@@ -109,15 +109,15 @@ export default function PricingPage() {
             rows={[
               {
                 label: "Logs",
-                cells: ["GB", "$0.05 / GB", "Uncompressed bytes ingested via OTLP"],
+                cells: ["GB", "$0.10 / GB", "Uncompressed bytes ingested via OTLP"],
               },
               {
                 label: "Traces",
-                cells: ["GB", "$0.06 / GB", "Uncompressed span bytes ingested via OTLP"],
+                cells: ["GB", "$0.10 / GB", "Uncompressed span bytes ingested via OTLP"],
               },
               {
                 label: "Metrics",
-                cells: ["DPM", "$0.001 / DPM", "Active series reporting once per minute"],
+                cells: ["DPM", "$0.008 / DPM", "Active series reporting once per minute"],
               },
             ]}
           />

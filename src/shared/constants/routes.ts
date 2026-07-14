@@ -12,6 +12,8 @@ export const ROUTES = {
   selfHost: "/self-host",
   privacy: "/privacy",
   terms: "/terms",
+  dpa: "/dpa",
+  support: "/support",
   security: "/security",
   overview: "/overview",
   services: "/services",

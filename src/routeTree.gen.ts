@@ -12,12 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing/index'
 import { Route as MarketingTermsRouteImport } from './routes/_marketing/terms'
+import { Route as MarketingSupportRouteImport } from './routes/_marketing/support'
 import { Route as MarketingSelfHostRouteImport } from './routes/_marketing/self-host'
 import { Route as MarketingSecurityRouteImport } from './routes/_marketing/security'
 import { Route as MarketingPrivacyRouteImport } from './routes/_marketing/privacy'
 import { Route as MarketingPricingRouteImport } from './routes/_marketing/pricing'
 import { Route as MarketingOpentelemetryRouteImport } from './routes/_marketing/opentelemetry'
 import { Route as MarketingFeaturesRouteImport } from './routes/_marketing/features'
+import { Route as MarketingDpaRouteImport } from './routes/_marketing/dpa'
 import { Route as MarketingCliRouteImport } from './routes/_marketing/cli'
 import { Route as MarketingArchitectureRouteImport } from './routes/_marketing/architecture'
 
@@ -33,6 +35,11 @@ const MarketingIndexRoute = MarketingIndexRouteImport.update({
 const MarketingTermsRoute = MarketingTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingSupportRoute = MarketingSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingSelfHostRoute = MarketingSelfHostRouteImport.update({
@@ -65,6 +72,11 @@ const MarketingFeaturesRoute = MarketingFeaturesRouteImport.update({
   path: '/features',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingDpaRoute = MarketingDpaRouteImport.update({
+  id: '/dpa',
+  path: '/dpa',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const MarketingCliRoute = MarketingCliRouteImport.update({
   id: '/cli',
   path: '/cli',
@@ -80,23 +92,27 @@ export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/architecture': typeof MarketingArchitectureRoute
   '/cli': typeof MarketingCliRoute
+  '/dpa': typeof MarketingDpaRoute
   '/features': typeof MarketingFeaturesRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
   '/privacy': typeof MarketingPrivacyRoute
   '/security': typeof MarketingSecurityRoute
   '/self-host': typeof MarketingSelfHostRoute
+  '/support': typeof MarketingSupportRoute
   '/terms': typeof MarketingTermsRoute
 }
 export interface FileRoutesByTo {
   '/architecture': typeof MarketingArchitectureRoute
   '/cli': typeof MarketingCliRoute
+  '/dpa': typeof MarketingDpaRoute
   '/features': typeof MarketingFeaturesRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
   '/privacy': typeof MarketingPrivacyRoute
   '/security': typeof MarketingSecurityRoute
   '/self-host': typeof MarketingSelfHostRoute
+  '/support': typeof MarketingSupportRoute
   '/terms': typeof MarketingTermsRoute
   '/': typeof MarketingIndexRoute
 }
@@ -105,12 +121,14 @@ export interface FileRoutesById {
   '/_marketing': typeof MarketingRouteWithChildren
   '/_marketing/architecture': typeof MarketingArchitectureRoute
   '/_marketing/cli': typeof MarketingCliRoute
+  '/_marketing/dpa': typeof MarketingDpaRoute
   '/_marketing/features': typeof MarketingFeaturesRoute
   '/_marketing/opentelemetry': typeof MarketingOpentelemetryRoute
   '/_marketing/pricing': typeof MarketingPricingRoute
   '/_marketing/privacy': typeof MarketingPrivacyRoute
   '/_marketing/security': typeof MarketingSecurityRoute
   '/_marketing/self-host': typeof MarketingSelfHostRoute
+  '/_marketing/support': typeof MarketingSupportRoute
   '/_marketing/terms': typeof MarketingTermsRoute
   '/_marketing/': typeof MarketingIndexRoute
 }
@@ -120,23 +138,27 @@ export interface FileRouteTypes {
     | '/'
     | '/architecture'
     | '/cli'
+    | '/dpa'
     | '/features'
     | '/opentelemetry'
     | '/pricing'
     | '/privacy'
     | '/security'
     | '/self-host'
+    | '/support'
     | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/architecture'
     | '/cli'
+    | '/dpa'
     | '/features'
     | '/opentelemetry'
     | '/pricing'
     | '/privacy'
     | '/security'
     | '/self-host'
+    | '/support'
     | '/terms'
     | '/'
   id:
@@ -144,12 +166,14 @@ export interface FileRouteTypes {
     | '/_marketing'
     | '/_marketing/architecture'
     | '/_marketing/cli'
+    | '/_marketing/dpa'
     | '/_marketing/features'
     | '/_marketing/opentelemetry'
     | '/_marketing/pricing'
     | '/_marketing/privacy'
     | '/_marketing/security'
     | '/_marketing/self-host'
+    | '/_marketing/support'
     | '/_marketing/terms'
     | '/_marketing/'
   fileRoutesById: FileRoutesById
@@ -179,6 +203,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof MarketingTermsRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/support': {
+      id: '/_marketing/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof MarketingSupportRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/self-host': {
@@ -223,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingFeaturesRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/dpa': {
+      id: '/_marketing/dpa'
+      path: '/dpa'
+      fullPath: '/dpa'
+      preLoaderRoute: typeof MarketingDpaRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/cli': {
       id: '/_marketing/cli'
       path: '/cli'
@@ -243,12 +281,14 @@ declare module '@tanstack/react-router' {
 interface MarketingRouteChildren {
   MarketingArchitectureRoute: typeof MarketingArchitectureRoute
   MarketingCliRoute: typeof MarketingCliRoute
+  MarketingDpaRoute: typeof MarketingDpaRoute
   MarketingFeaturesRoute: typeof MarketingFeaturesRoute
   MarketingOpentelemetryRoute: typeof MarketingOpentelemetryRoute
   MarketingPricingRoute: typeof MarketingPricingRoute
   MarketingPrivacyRoute: typeof MarketingPrivacyRoute
   MarketingSecurityRoute: typeof MarketingSecurityRoute
   MarketingSelfHostRoute: typeof MarketingSelfHostRoute
+  MarketingSupportRoute: typeof MarketingSupportRoute
   MarketingTermsRoute: typeof MarketingTermsRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
 }
@@ -256,12 +296,14 @@ interface MarketingRouteChildren {
 const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingArchitectureRoute: MarketingArchitectureRoute,
   MarketingCliRoute: MarketingCliRoute,
+  MarketingDpaRoute: MarketingDpaRoute,
   MarketingFeaturesRoute: MarketingFeaturesRoute,
   MarketingOpentelemetryRoute: MarketingOpentelemetryRoute,
   MarketingPricingRoute: MarketingPricingRoute,
   MarketingPrivacyRoute: MarketingPrivacyRoute,
   MarketingSecurityRoute: MarketingSecurityRoute,
   MarketingSelfHostRoute: MarketingSelfHostRoute,
+  MarketingSupportRoute: MarketingSupportRoute,
   MarketingTermsRoute: MarketingTermsRoute,
   MarketingIndexRoute: MarketingIndexRoute,
 }
