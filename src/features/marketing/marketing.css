@@ -179,46 +179,6 @@
   gap: 10px;
 }
 
-.m-nav-stars {
-  display: none;
-  align-items: center;
-  gap: 8px;
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid var(--m-line-strong);
-  border-radius: var(--m-r-pill);
-  background: var(--m-surface);
-  color: var(--m-ink);
-  font-family: var(--m-font-mono);
-  font-size: 12.5px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.m-nav-stars:hover {
-  transform: translateY(-1px);
-  border-color: var(--m-ink);
-  box-shadow: var(--m-shadow-sm);
-}
-
-.m-nav-stars-sep {
-  width: 1px;
-  height: 14px;
-  background: var(--m-line-strong);
-}
-
-.m-nav-stars svg:last-of-type {
-  color: var(--m-orange);
-  fill: var(--m-orange);
-}
-
-@media (min-width: 780px) {
-  .m-nav-stars {
-    display: inline-flex;
-  }
-}
-
 .m-nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -533,6 +493,17 @@
   color: inherit;
   font-family: inherit;
   white-space: pre;
+}
+
+/* Stacked CLI + UI visual: terminal session over the equivalent web view. */
+.m-cli-ui {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-cli-ui-shot {
+  border-top: 1px solid var(--m-line-strong);
+  background: #fbfbf7;
 }
 
 .m-hero-art {
@@ -1036,24 +1007,6 @@
   color: var(--m-muted);
 }
 
-.m-price-amount {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-}
-
-.m-price-amount strong {
-  font-size: clamp(38px, 4vw, 54px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.m-price-amount span {
-  color: var(--m-muted);
-  font-size: 14px;
-}
-
 .m-price-list {
   list-style: none;
   margin: 0;
@@ -1075,19 +1028,40 @@
   margin-top: 3px;
 }
 
-.m-price-grid.is-duo {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 920px;
-  margin: 0 auto;
+.m-price-plan-amount {
+  min-height: 54px;
+  font-size: 24px;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  color: var(--m-ink);
 }
 
-.m-price-rates {
+.m-price-plan-details {
+  display: grid;
+  flex: 1;
+  gap: 22px;
+}
+
+.m-price-plan-section {
   display: grid;
   gap: 10px;
 }
 
-.m-price-rates .m-price-amount strong {
-  font-size: 28px;
+.m-price-plan-section h3 {
+  margin: 0;
+  font-family: var(--m-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--m-ink-2);
+}
+
+.m-pricing-note {
+  margin: 20px 0 0;
+  text-align: center;
+  color: var(--m-muted);
+  font-size: 14px;
 }
 
 @media (max-width: 900px) {
@@ -1522,12 +1496,6 @@
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
-[data-theme="dark"] .marketing-root-themed .m-nav-stars {
-  background: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
 [data-theme="dark"] .marketing-root-themed .m-footer {
   background: var(--bg-secondary) !important;
   border-top-color: var(--border-color) !important;
@@ -1572,4 +1540,77 @@
 
 [data-theme="dark"] .marketing-root-themed .m-footer-socials a:hover {
   color: #ffffff !important;
+}
+
+/* Command reference grid (CLI page) */
+.m-cmdref {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.m-cmdref-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--m-line);
+  border-radius: var(--m-r-lg);
+  background: var(--m-surface);
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.m-cmdref-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--m-teal);
+  box-shadow: var(--m-shadow-md);
+}
+
+.m-cmdref-head {
+  display: grid;
+  gap: 8px;
+}
+
+.m-cmdref-cmd {
+  font-family: var(--m-font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--m-teal-deep);
+}
+
+.m-cmdref-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--m-ink-3);
+}
+
+.m-cmdref-list {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--m-line);
+  display: grid;
+  gap: 10px;
+}
+
+.m-cmdref-list li {
+  display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.m-cmdref-list code {
+  font-family: var(--m-font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--m-ink);
+  white-space: nowrap;
+}
+
+.m-cmdref-list span {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--m-ink-3);
 }

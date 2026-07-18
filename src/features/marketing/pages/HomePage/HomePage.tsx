@@ -8,9 +8,7 @@ import { LogoStrip } from "../../sections/LogoStrip";
 import { OpenSourceSection } from "../../sections/OpenSourceSection";
 import { SectionHeader } from "../../sections/SectionHeader";
 import { Split } from "../../sections/Split";
-import { DashboardMock } from "../../visuals/DashboardMock";
-import { Screenshot } from "../../visuals/Screenshot";
-import { TerminalWindow } from "../../visuals/TerminalWindow";
+import { CliUiVisual } from "../../visuals/CliUiVisual";
 import { PILLARS, STACK_LOGOS } from "./HomePageData";
 
 const HERO_SESSION = `$ optikk services list --from 1h
@@ -19,14 +17,7 @@ SERVICE      REQUESTS  ERRORS  AVG ms  P95 ms  P99 ms
 api-gateway  182304    21      38.2    91.4    142.7
 checkout     41889     1743    112.9   840.1   2410.3
 payment-svc  40112     1502    96.5    712.8   1988.4
-inventory    78451     3       22.1    54.9    88.0
-
-$ optikk traces search -q "service:checkout status:error" --from 15m --limit 3
-
-TRACE ID          SERVICE   OPERATION              STATUS  DURATION  SPANS  TIME
-9f3c21ab44d0e817  checkout  POST /api/v2/checkout  error   2.41s     47     14:23:51
-b82fe0c1a9d34771  checkout  POST /api/v2/checkout  error   2.18s     45     14:23:47
-04d7c9ee52b1f3a0  checkout  POST /api/v2/checkout  error   1.97s     44     14:23:40`;
+inventory    78451     3       22.1    54.9    88.0`;
 
 const METRICS_SESSION = `$ optikk metrics query --metric http.server.duration \\
     --aggregation p99 --group-by service --from 3h
@@ -40,6 +31,22 @@ const METRICS_SESSION = `$ optikk metrics query --metric http.server.duration \\
   ]
 }`;
 
+const LOGS_SESSION = `$ optikk logs search \\
+    -q "severity_text:ERROR service_name:payment-svc" --from 15m
+
+TIMESTAMP     SERVICE      SEVERITY  BODY
+14:23:51.412  payment-svc  ERROR     Lock wait timeout exceeded
+14:23:47.098  payment-svc  ERROR     Lock wait timeout exceeded
+14:23:40.771  payment-svc  ERROR     rolling back txn 8af14b`;
+
+const TRACES_SESSION = `$ optikk traces search \\
+    -q "service:checkout status:error" --from 15m --limit 3
+
+TRACE ID          OPERATION              STATUS  DURATION
+9f3c21ab44d0e817  POST /api/v2/checkout  error   2.41s
+b82fe0c1a9d34771  POST /api/v2/checkout  error   2.18s
+04d7c9ee52b1f3a0  POST /api/v2/checkout  error   1.97s`;
+
 export default function HomePage() {
   return (
     <>
@@ -47,14 +54,23 @@ export default function HomePage() {
         eyebrow="AI-native observability · now in public beta"
         title={
           <>
-            Observability that lives <GradientText>in your terminal.</GradientText>
+            Observability for <GradientText>the AI era.</GradientText>
           </>
         }
-        subtitle="Unified logs, metrics, and traces, queryable from the terminal with the optikk CLI, or by Claude Code, Cursor, Codex, and Antigravity investigating incidents for you. OpenTelemetry-native, open source, self-hostable."
+        subtitle="Observe your AI apps, and let AI operate your observability. Unified logs, metrics, and traces for your LLM calls and everything beneath them — queryable from the terminal with the optikk CLI, or by Claude Code, Cursor, Codex, and Antigravity investigating incidents for you. OpenTelemetry-native, open source, self-hostable."
         primaryCta={{ label: "Start free", path: APP_URLS.signup }}
         secondaryCta={{ label: "Self-host now", path: "/self-host", variant: "secondary" }}
         meta={["Apache 2.0 licensed", "Built for coding agents", "5-minute setup"]}
-        visual={<TerminalWindow>{HERO_SESSION}</TerminalWindow>}
+        visual={
+          <CliUiVisual
+            session={HERO_SESSION}
+            screenshot={{
+              name: "services",
+              alt: "Optikk services dashboard showing RED metrics for the same fleet in the web UI",
+              mock: "metrics",
+            }}
+          />
+        }
       />
 
       <LogoStrip label="Runs on the stack you already have" items={STACK_LOGOS} />
@@ -99,11 +115,14 @@ export default function HomePage() {
             ]}
             link={{ label: "Explore logs", path: "/features#logs" }}
             visual={
-              <Screenshot
-                name="logs"
-                alt="Optikk logs explorer with severity facets and timeline histogram"
-                bare
-                fallback={<DashboardMock type="logs" />}
+              <CliUiVisual
+                terminalTitle="~ optikk logs"
+                session={LOGS_SESSION}
+                screenshot={{
+                  name: "logs",
+                  alt: "Optikk logs explorer with severity facets and timeline histogram",
+                  mock: "logs",
+                }}
               />
             }
           />
@@ -134,11 +153,14 @@ export default function HomePage() {
             ]}
             link={{ label: "See trace explorer", path: "/features#traces" }}
             visual={
-              <Screenshot
-                name="trace"
-                alt="Optikk trace waterfall for POST /api/v2/checkout with span detail panel"
-                bare
-                fallback={<DashboardMock type="traces" />}
+              <CliUiVisual
+                terminalTitle="~ optikk traces"
+                session={TRACES_SESSION}
+                screenshot={{
+                  name: "trace",
+                  alt: "Optikk trace waterfall for POST /api/v2/checkout with span detail panel",
+                  mock: "traces",
+                }}
               />
             }
           />
@@ -167,7 +189,17 @@ export default function HomePage() {
               },
             ]}
             link={{ label: "Metrics deep-dive", path: "/features#metrics" }}
-            visual={<TerminalWindow title="~ optikk metrics">{METRICS_SESSION}</TerminalWindow>}
+            visual={
+              <CliUiVisual
+                terminalTitle="~ optikk metrics"
+                session={METRICS_SESSION}
+                screenshot={{
+                  name: "overview",
+                  alt: "Optikk metrics dashboard with p99 latency by service in the web UI",
+                  mock: "metrics",
+                }}
+              />
+            }
           />
         </div>
       </section>

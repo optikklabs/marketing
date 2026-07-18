@@ -8,6 +8,8 @@ import { CTA } from "../../sections/CTA";
 import { CodeBlock } from "../../sections/CodeBlock";
 import { Hero } from "../../sections/Hero";
 import { SectionHeader } from "../../sections/SectionHeader";
+import { DashboardMock } from "../../visuals/DashboardMock";
+import { Screenshot } from "../../visuals/Screenshot";
 import {
   AGENT_TABS,
   FLEET_TABS,
@@ -16,6 +18,13 @@ import {
   OPERATE_TABS,
   QUERY_TABS,
 } from "./CliPageData";
+import { CommandReference } from "./CommandReference";
+
+interface CliShot {
+  readonly name: Parameters<typeof Screenshot>[0]["name"];
+  readonly alt: string;
+  readonly mock: Parameters<typeof DashboardMock>[0]["type"];
+}
 
 interface CliSectionProps {
   readonly eyebrow: string;
@@ -24,15 +33,32 @@ interface CliSectionProps {
   readonly tabs: Parameters<typeof CodeBlock>[0]["tabs"];
   readonly warm?: boolean;
   readonly id?: string;
+  readonly screenshot?: CliShot;
 }
 
-function CliSection({ eyebrow, title, lede, tabs, warm, id }: CliSectionProps) {
+function CliSection({ eyebrow, title, lede, tabs, warm, id, screenshot }: CliSectionProps) {
   return (
     <section className={`m-section${warm ? " m-section--warm" : ""}`} id={id}>
       <div className="m-container">
         <SectionHeader eyebrow={eyebrow} title={title} lede={lede} />
         <Reveal>
-          <CodeBlock tabs={tabs} />
+          {screenshot ? (
+            <div className="m-split">
+              <div className="m-split-copy">
+                <CodeBlock tabs={tabs} />
+              </div>
+              <div className="m-split-visual">
+                <Screenshot
+                  name={screenshot.name}
+                  alt={screenshot.alt}
+                  bare
+                  fallback={<DashboardMock type={screenshot.mock} />}
+                />
+              </div>
+            </div>
+          ) : (
+            <CodeBlock tabs={tabs} />
+          )}
         </Reveal>
       </div>
     </section>
@@ -86,9 +112,14 @@ export default function CliPage() {
             Three signals, <GradientText>one query DSL.</GradientText>
           </>
         }
-        lede="Search traces and logs with the same service:api status:error syntax the UI uses, and run timeseries aggregations over any metric."
+        lede="Search traces and logs with the same service:api status:error syntax the UI uses, and run timeseries aggregations over any metric. Every command maps to a view in the web app — run it in the shell, or open the same result in your browser."
         tabs={QUERY_TABS}
         warm
+        screenshot={{
+          name: "trace",
+          alt: "Optikk trace explorer showing the same checkout trace in the web UI",
+          mock: "traces",
+        }}
       />
 
       <CliSection
@@ -98,8 +129,13 @@ export default function CliPage() {
             RED metrics to <GradientText>Kafka lag</GradientText>, without leaving the shell.
           </>
         }
-        lede="Fleet-wide service health, host and pod utilization, and database or Kafka saturation are each one table away."
+        lede="Fleet-wide service health, host and pod utilization, and database or Kafka saturation are each one table away — and the same numbers back the service map and saturation dashboards in the web UI."
         tabs={FLEET_TABS}
+        screenshot={{
+          name: "services",
+          alt: "Optikk services dashboard with RED metrics for the same fleet in the web UI",
+          mock: "metrics",
+        }}
       />
 
       <CliSection
@@ -109,9 +145,14 @@ export default function CliPage() {
             LLM spend, dashboards, monitors <GradientText>as commands.</GradientText>
           </>
         }
-        lede="Track model cost by service, move dashboards through git as JSON, and mute, ack, or test monitors mid-incident."
+        lede="Track model cost by service, move dashboards through git as JSON, and mute, ack, or test monitors mid-incident — then watch it land on the same dashboards your team already reads in the web UI."
         tabs={OPERATE_TABS}
         warm
+        screenshot={{
+          name: "overview",
+          alt: "Optikk overview dashboard rendering the same monitors and cost data in the web UI",
+          mock: "metrics",
+        }}
       />
 
       <CliSection
@@ -125,6 +166,8 @@ export default function CliPage() {
         lede="Claude Code, Cursor, Codex, and Antigravity drive optikk natively: the CLI self-describes as JSON, piped output is JSON automatically, and --agent mode removes interactive prompts."
         tabs={AGENT_TABS}
       />
+
+      <CommandReference />
 
       <CTA
         eyebrow="Get started"

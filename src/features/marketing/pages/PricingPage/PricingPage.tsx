@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 
 import { APP_URLS } from "@/shared/constants/app";
@@ -10,21 +9,7 @@ import { ComparisonTable } from "../../sections/ComparisonTable";
 import { FAQ } from "../../sections/FAQ";
 import { Hero } from "../../sections/Hero";
 import { SectionHeader } from "../../sections/SectionHeader";
-import { MANAGED_RATES, PRICING_FAQS } from "./PricingPageData";
-
-const MANAGED_FEATURES = [
-  "Fully managed, meaning no Kafka, ClickHouse, or Kubernetes to run",
-  "All features included: AI SRE, SSO, alerting, dashboards",
-  "Signup to first trace in minutes with optikk onboard",
-  "No per-seat or per-host charges",
-];
-
-const SELF_HOST_FEATURES = [
-  "Apache 2.0 licensed, no feature gates",
-  "Run in your VPC, private cloud, or air-gapped",
-  "SAML SSO, clustering, and AI SRE included",
-  "Helm, Terraform, and Docker Compose deploys",
-];
+import { PLANS, PRICING_FAQS, USAGE_RATES } from "./PricingPageData";
 
 export default function PricingPage() {
   return (
@@ -36,57 +21,45 @@ export default function PricingPage() {
             Simple, usage-based. <GradientText>Pay for what you ingest.</GradientText>
           </>
         }
-        subtitle="No per-seat pricing, no per-host pricing, no feature gates. Managed Optikk meters the telemetry you send, while self-hosting the full platform stays free forever."
+        subtitle="Straightforward managed plans for every stage, with usage rates that fall as your telemetry footprint grows. No per-seat or per-host charges."
         primaryCta={{ label: "Start free", path: APP_URLS.signup }}
         secondaryCta={{ label: "Self-host now", path: "/self-host", variant: "secondary" }}
       />
 
       <section className="m-section m-section--tight">
         <div className="m-container">
-          <Reveal className="is-duo m-price-grid">
-            <article className="is-featured m-price-card">
-              <span className="m-price-badge">Usage-based</span>
-              <span className="m-price-tier">Managed Cloud</span>
-              <div className="m-price-rates">
-                {MANAGED_RATES.map((rate) => (
-                  <div key={rate.signal} className="m-price-amount">
-                    <span style={{ minWidth: 72 }}>{rate.signal}</span>
-                    <strong>{rate.price}</strong>
-                    <span>{rate.unit}</span>
-                  </div>
-                ))}
-              </div>
-              <ul className="m-price-list" style={{ flex: 1 }}>
-                {MANAGED_FEATURES.map((f) => (
-                  <li key={f}>
-                    <Check size={16} strokeWidth={2.5} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <a className="m-btn m-btn-primary" href={APP_URLS.signup}>
-                Start free
-              </a>
-            </article>
-
-            <article className="m-price-card">
-              <span className="m-price-tier">Self-hosted</span>
-              <div className="m-price-amount">
-                <strong>Free</strong>
-                <span>forever · open source</span>
-              </div>
-              <ul className="m-price-list" style={{ flex: 1 }}>
-                {SELF_HOST_FEATURES.map((f) => (
-                  <li key={f}>
-                    <Check size={16} strokeWidth={2.5} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link to={"/self-host" as string & {}} className="m-btn m-btn-secondary">
-                Self-host now
-              </Link>
-            </article>
+          <Reveal className="m-price-grid">
+            {PLANS.map((plan) => (
+              <article
+                key={plan.name}
+                className={`m-price-card${plan.featured ? " is-featured" : ""}`}
+              >
+                {plan.featured && <span className="m-price-badge">Most popular</span>}
+                <span className="m-price-tier">{plan.name}</span>
+                <div className="m-price-plan-amount">{plan.price}</div>
+                <div className="m-price-plan-details">
+                  {plan.sections.map((section) => (
+                    <div key={section.title} className="m-price-plan-section">
+                      <h3>{section.title}</h3>
+                      <ul className="m-price-list">
+                        {section.items.map((item) => (
+                          <li key={item}>
+                            <Check size={16} strokeWidth={2.5} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  className={`m-btn ${plan.featured ? "m-btn-primary" : "m-btn-secondary"}`}
+                  href={plan.actionUrl === "signup" ? APP_URLS.signup : plan.actionUrl}
+                >
+                  {plan.action}
+                </a>
+              </article>
+            ))}
           </Reveal>
         </div>
       </section>
@@ -94,33 +67,31 @@ export default function PricingPage() {
       <section className="m-section">
         <div className="m-container">
           <SectionHeader
-            eyebrow="The meter"
+            eyebrow="Usage rates"
             title={
               <>
-                Three signals. <GradientText>Three numbers.</GradientText>
+                More telemetry. <GradientText>Lower unit rates.</GradientText>
               </>
             }
-            lede="Everything else, including users, hosts, dashboards, monitors, and the AI SRE, is included."
+            lede="Monthly rates are billed annually. Logs, traces, and profiles share one ingestion meter; metrics are based on active time series per hour."
             align="center"
           />
           <ComparisonTable
-            columns={["Signal", "Unit", "Price", "What counts"]}
-            highlightColumn={2}
-            rows={[
-              {
-                label: "Logs",
-                cells: ["GB", "$0.10 / GB", "Uncompressed bytes ingested via OTLP"],
-              },
-              {
-                label: "Traces",
-                cells: ["GB", "$0.10 / GB", "Uncompressed span bytes ingested via OTLP"],
-              },
-              {
-                label: "Metrics",
-                cells: ["DPM", "$0.008 / DPM", "Active series reporting once per minute"],
-              },
+            columns={[
+              "Daily logs, traces & profiles",
+              "Rate",
+              "Active time series / hour",
+              "Rate",
             ]}
+            highlightColumn={1}
+            rows={USAGE_RATES.map((tier) => ({
+              label: tier.volume,
+              cells: [tier.ingestRate, tier.series, tier.metricsRate],
+            }))}
           />
+          <p className="m-pricing-note">
+            30 days of retention is included. Extra retention is billed at $0.001 per GB-month.
+          </p>
         </div>
       </section>
 
