@@ -18,6 +18,7 @@ import { Route as MarketingSecurityRouteImport } from './routes/_marketing/secur
 import { Route as MarketingPrivacyRouteImport } from './routes/_marketing/privacy'
 import { Route as MarketingPricingRouteImport } from './routes/_marketing/pricing'
 import { Route as MarketingOpentelemetryRouteImport } from './routes/_marketing/opentelemetry'
+import { Route as MarketingHowItWorksRouteImport } from './routes/_marketing/how-it-works'
 import { Route as MarketingFeaturesRouteImport } from './routes/_marketing/features'
 import { Route as MarketingDpaRouteImport } from './routes/_marketing/dpa'
 import { Route as MarketingCliRouteImport } from './routes/_marketing/cli'
@@ -67,6 +68,11 @@ const MarketingOpentelemetryRoute = MarketingOpentelemetryRouteImport.update({
   path: '/opentelemetry',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingHowItWorksRoute = MarketingHowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const MarketingFeaturesRoute = MarketingFeaturesRouteImport.update({
   id: '/features',
   path: '/features',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/cli': typeof MarketingCliRoute
   '/dpa': typeof MarketingDpaRoute
   '/features': typeof MarketingFeaturesRoute
+  '/how-it-works': typeof MarketingHowItWorksRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
   '/privacy': typeof MarketingPrivacyRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/cli': typeof MarketingCliRoute
   '/dpa': typeof MarketingDpaRoute
   '/features': typeof MarketingFeaturesRoute
+  '/how-it-works': typeof MarketingHowItWorksRoute
   '/opentelemetry': typeof MarketingOpentelemetryRoute
   '/pricing': typeof MarketingPricingRoute
   '/privacy': typeof MarketingPrivacyRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/_marketing/cli': typeof MarketingCliRoute
   '/_marketing/dpa': typeof MarketingDpaRoute
   '/_marketing/features': typeof MarketingFeaturesRoute
+  '/_marketing/how-it-works': typeof MarketingHowItWorksRoute
   '/_marketing/opentelemetry': typeof MarketingOpentelemetryRoute
   '/_marketing/pricing': typeof MarketingPricingRoute
   '/_marketing/privacy': typeof MarketingPrivacyRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/cli'
     | '/dpa'
     | '/features'
+    | '/how-it-works'
     | '/opentelemetry'
     | '/pricing'
     | '/privacy'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/cli'
     | '/dpa'
     | '/features'
+    | '/how-it-works'
     | '/opentelemetry'
     | '/pricing'
     | '/privacy'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/_marketing/cli'
     | '/_marketing/dpa'
     | '/_marketing/features'
+    | '/_marketing/how-it-works'
     | '/_marketing/opentelemetry'
     | '/_marketing/pricing'
     | '/_marketing/privacy'
@@ -247,6 +259,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingOpentelemetryRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/how-it-works': {
+      id: '/_marketing/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof MarketingHowItWorksRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/features': {
       id: '/_marketing/features'
       path: '/features'
@@ -283,6 +302,7 @@ interface MarketingRouteChildren {
   MarketingCliRoute: typeof MarketingCliRoute
   MarketingDpaRoute: typeof MarketingDpaRoute
   MarketingFeaturesRoute: typeof MarketingFeaturesRoute
+  MarketingHowItWorksRoute: typeof MarketingHowItWorksRoute
   MarketingOpentelemetryRoute: typeof MarketingOpentelemetryRoute
   MarketingPricingRoute: typeof MarketingPricingRoute
   MarketingPrivacyRoute: typeof MarketingPrivacyRoute
@@ -298,6 +318,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingCliRoute: MarketingCliRoute,
   MarketingDpaRoute: MarketingDpaRoute,
   MarketingFeaturesRoute: MarketingFeaturesRoute,
+  MarketingHowItWorksRoute: MarketingHowItWorksRoute,
   MarketingOpentelemetryRoute: MarketingOpentelemetryRoute,
   MarketingPricingRoute: MarketingPricingRoute,
   MarketingPrivacyRoute: MarketingPrivacyRoute,
