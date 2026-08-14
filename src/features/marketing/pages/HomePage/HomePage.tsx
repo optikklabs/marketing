@@ -51,13 +51,13 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="AI-native observability · now in public beta"
+        eyebrow="CLI-native observability"
         title={
           <>
             Observability for <GradientText>the AI era.</GradientText>
           </>
         }
-        subtitle="Observe your AI apps, and let AI operate your observability. Unified logs, metrics, and traces for your LLM calls and everything beneath them — queryable from the terminal with the optikk CLI, or by Claude Code, Cursor, Codex, and Antigravity investigating incidents for you. OpenTelemetry-native, open source, self-hostable."
+        subtitle="Unified logs, metrics, and traces for your entire stack and LLM applications. OpenTelemetry-native, open source, and queryable from the terminal or by AI coding agents."
         primaryCta={{ label: "Start free", path: APP_URLS.signup }}
         secondaryCta={{ label: "Self-host now", path: "/self-host", variant: "secondary" }}
         meta={["Apache 2.0 licensed", "Built for coding agents", "5-minute setup"]}
@@ -86,7 +86,7 @@ export default function HomePage() {
                 Everything in one place, <GradientText>nothing forced into a box.</GradientText>
               </>
             }
-            lede="Optikk is six tools shaped like one: ingest, store, query, alert, explain, and act. These are unified in a single, high-performance telemetry pipeline, from your terminal or your agent."
+            lede="Ingest, store, query, alert, explain, and act — unified in a single high-performance telemetry pipeline."
           />
           <FeatureGrid items={PILLARS} />
         </div>
@@ -98,19 +98,19 @@ export default function HomePage() {
             id="logs"
             eyebrow="Logs"
             title="The full stream, not just samples."
-            body="Every line lands in our unified database with the full attribute map indexed. 30 days of hot data, columnar scans under 200ms, no log-vs-trace tradeoff."
+            body="Every line indexed in a high-speed columnar store with sub-200ms queries and 30 days of hot retention."
             list={[
               {
-                title: "Sub-second query on 30 days hot",
-                body: "Partitions by day and service, with built-in projection indexes optimized for queries observability tools actually run.",
+                title: "Sub-second queries",
+                body: "Optimized projection indexes for instant filtering and aggregations.",
               },
               {
-                title: "Instant live tail streaming",
-                body: "A million concurrent filtered tails fan out from the cache without touching the analytical store.",
+                title: "Live tail streaming",
+                body: "Stream filtered logs directly to your browser or terminal in real time.",
               },
               {
-                title: "Pattern detection without rules",
-                body: "Auto-cluster log lines into templates. Spot the outlier in 2 billion lines in one click.",
+                title: "Automated pattern clustering",
+                body: "Group billions of log lines into templates to spot anomalies instantly.",
               },
             ]}
             link={{ label: "Explore logs", path: "/features#logs" }}
@@ -135,20 +135,20 @@ export default function HomePage() {
             id="traces"
             reverse
             eyebrow="Traces"
-            title="Datadog-parity tracing. Open-format storage."
-            body="Drag-to-zoom flame graphs, span-level diff, latency heatmaps, and a 10-tab span drawer with code, logs, profile, and AI explanation."
+            title="High-performance distributed tracing."
+            body="Interactive flame graphs, span diffing, latency heatmaps, and AI-powered root cause analysis."
             list={[
               {
-                title: "Compare any two traces",
-                body: "Side-by-side spans, attribute diff, p99 delta. The fastest way to prove a deploy regressed.",
+                title: "Trace comparisons",
+                body: "Side-by-side span diffs to pinpoint regressions between deployments.",
               },
               {
-                title: "Cardinality without panic",
-                body: "Group by user, tenant, region, query plan. We were built assuming you'd actually use the tags.",
+                title: "High cardinality",
+                body: "Filter and group by any tag or attribute without limits.",
               },
               {
-                title: "Native OTLP, no proprietary SDK",
-                body: "Point your existing OpenTelemetry collector at us. Your traces, your schema, our query engine.",
+                title: "Native OTLP",
+                body: "Zero proprietary agents. Connect any standard OpenTelemetry collector.",
               },
             ]}
             link={{ label: "See trace explorer", path: "/features#traces" }}
@@ -172,20 +172,20 @@ export default function HomePage() {
           <Split
             id="metrics"
             eyebrow="Metrics"
-            title="Prometheus-compatible. Time-series at warehouse scale."
-            body="Ingest OTLP and Prometheus side by side. Run PromQL on a year of metrics without pre-aggregation hell."
+            title="Prometheus-compatible time series."
+            body="Ingest OTLP and Prometheus metrics side by side with native PromQL query support."
             list={[
               {
                 title: "PromQL native",
-                body: "Drop-in for Prometheus queries, alerts, and Grafana dashboards. Migrate at your own pace.",
+                body: "Drop-in compatibility with existing Prometheus queries and alerts.",
               },
               {
-                title: "Unlimited cardinality, no tag tax",
-                body: "Tags are free. Stop dropping labels just to keep your dashboards fast.",
+                title: "Unlimited labels",
+                body: "Store high-cardinality series without dropping labels.",
               },
               {
-                title: "Recording rules + AI baselines",
-                body: "Optikk learns your seasonality. Alert on actual anomalies, not 2σ spikes at 9am on Mondays.",
+                title: "Smart baselines",
+                body: "Automated anomaly detection tailored to your traffic patterns.",
               },
             ]}
             link={{ label: "Metrics deep-dive", path: "/features#metrics" }}
@@ -213,7 +213,7 @@ export default function HomePage() {
             One curl command. <GradientText>That's the setup.</GradientText>
           </>
         }
-        subtitle="curl -fsSL https://optikk.in/install.sh | sh then optikk onboard prints the OTLP endpoint and API key for your collector."
+        subtitle="Install the CLI, run onboard, and start ingesting OpenTelemetry data in minutes."
         primary={{ label: "Start free", path: APP_URLS.signup }}
         secondary={{ label: "Read the CLI docs", path: "/cli", variant: "secondary" }}
       />

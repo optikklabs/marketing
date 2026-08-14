@@ -21,7 +21,7 @@ export default function PricingPage() {
             Simple, usage-based. <GradientText>Pay for what you ingest.</GradientText>
           </>
         }
-        subtitle="Straightforward managed plans for every stage, with usage rates that fall as your telemetry footprint grows. No per-seat or per-host charges."
+        subtitle="Transparent usage-based pricing for every stage. Pay only for what you ingest with no per-seat or per-host fees."
         primaryCta={{ label: "Start free", path: APP_URLS.signup }}
         secondaryCta={{ label: "Self-host now", path: "/self-host", variant: "secondary" }}
       />
@@ -73,16 +73,11 @@ export default function PricingPage() {
                 More telemetry. <GradientText>Lower unit rates.</GradientText>
               </>
             }
-            lede="Monthly rates are billed annually. Logs, traces, and profiles share one ingestion meter; metrics are based on active time series per hour."
+            lede="Logs, traces, and profiles share one ingestion meter. Metrics are billed per active time series."
             align="center"
           />
           <ComparisonTable
-            columns={[
-              "Daily logs, traces & profiles",
-              "Rate",
-              "Active time series / hour",
-              "Rate",
-            ]}
+            columns={["Daily logs, traces & profiles", "Rate", "Active time series / hour", "Rate"]}
             highlightColumn={1}
             rows={USAGE_RATES.map((tier) => ({
               label: tier.volume,
@@ -109,7 +104,7 @@ export default function PricingPage() {
             One command to onboard. <GradientText>One meter to watch.</GradientText>
           </>
         }
-        subtitle="Run optikk onboard to get an API key and OTLP endpoint, point your collector at it, and you're live."
+        subtitle="Run optikk onboard to get an API key and OTLP endpoint, point your collector at it, and you're live in minutes."
         primary={{ label: "Start free", path: APP_URLS.signup }}
         secondary={{ label: "Explore the CLI", path: "/cli", variant: "secondary" }}
       />

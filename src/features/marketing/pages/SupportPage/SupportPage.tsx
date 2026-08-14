@@ -16,7 +16,7 @@ export default function SupportPage() {
             We&apos;re here when telemetry <GradientText>doesn&apos;t line up.</GradientText>
           </>
         }
-        subtitle="Reach the team by email and get a response within a defined window based on severity. No ticket portals, no phone trees."
+        subtitle="Direct engineering support with defined response targets based on severity. No ticket portals or phone trees."
         primaryCta={{ label: "Email support", path: `mailto:${SUPPORT_EMAIL}` }}
         secondaryCta={{ label: "Read the docs", path: "/opentelemetry", variant: "secondary" }}
       />
@@ -32,9 +32,8 @@ export default function SupportPage() {
             }
             lede={
               <>
-                Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> for anything —
-                incidents, billing, onboarding, or a question about instrumentation. Include your
-                organization name so we can find your account quickly.
+                Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> for incidents,
+                billing, onboarding, or instrumentation assistance.
               </>
             }
             align="center"

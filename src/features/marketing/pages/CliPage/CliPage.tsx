@@ -75,7 +75,7 @@ export default function CliPage() {
             The whole platform, <GradientText>one binary.</GradientText>
           </>
         }
-        subtitle="Traces, logs, metrics, services, infra, LLM cost, dashboards, and monitors. Every capability of Optikk is a command. Human-friendly tables in your terminal, JSON for your scripts and agents."
+        subtitle="Query traces, logs, metrics, services, and LLM costs directly from your terminal. Human-friendly tables for developers, structured JSON for scripts and agents."
         primaryCta={{ label: "Start free", path: APP_URLS.signup }}
         secondaryCta={{ label: "See pricing", path: "/pricing", variant: "secondary" }}
         meta={["Single static binary", "macOS + Linux", "Datadog-style query DSL"]}
@@ -112,7 +112,7 @@ export default function CliPage() {
             Three signals, <GradientText>one query DSL.</GradientText>
           </>
         }
-        lede="Search traces and logs with the same service:api status:error syntax the UI uses, and run timeseries aggregations over any metric. Every command maps to a view in the web app — run it in the shell, or open the same result in your browser."
+        lede="Search traces and logs with intuitive query syntax, and run timeseries aggregations across metrics with sub-second response times."
         tabs={QUERY_TABS}
         warm
         screenshot={{
@@ -129,7 +129,7 @@ export default function CliPage() {
             RED metrics to <GradientText>Kafka lag</GradientText>, without leaving the shell.
           </>
         }
-        lede="Fleet-wide service health, host and pod utilization, and database or Kafka saturation are each one table away — and the same numbers back the service map and saturation dashboards in the web UI."
+        lede="Inspect fleet-wide service health, host and pod utilization, and database or Kafka saturation with single commands."
         tabs={FLEET_TABS}
         screenshot={{
           name: "services",
@@ -145,7 +145,7 @@ export default function CliPage() {
             LLM spend, dashboards, monitors <GradientText>as commands.</GradientText>
           </>
         }
-        lede="Track model cost by service, move dashboards through git as JSON, and mute, ack, or test monitors mid-incident — then watch it land on the same dashboards your team already reads in the web UI."
+        lede="Track model costs by service, manage dashboards as code, and mute, acknowledge, or test monitors directly from the terminal."
         tabs={OPERATE_TABS}
         warm
         screenshot={{
@@ -176,7 +176,7 @@ export default function CliPage() {
             One curl command. <GradientText>That's the setup.</GradientText>
           </>
         }
-        subtitle="Sign up, run optikk onboard, and point your OpenTelemetry collector at the endpoint it prints."
+        subtitle="Run optikk onboard to get your endpoint and start streaming telemetry in minutes."
         primary={{ label: "Start free", path: APP_URLS.signup }}
         secondary={{ label: "Self-host instead", path: "/self-host", variant: "secondary" }}
       />

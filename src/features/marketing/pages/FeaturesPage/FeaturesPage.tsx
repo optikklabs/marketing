@@ -40,7 +40,7 @@ export default function FeaturesPage() {
             Every signal, <GradientText>one query language, one database.</GradientText>
           </>
         }
-        subtitle="Logs, traces, metrics, profiles, RUM, and LLM spans land in the same ClickHouse lake. Optikk lets you cross-reference them at warehouse speed."
+        subtitle="Logs, traces, metrics, and LLM spans unified in a single high-performance lake with sub-second queries."
         primaryCta={{ label: "Self-host now", path: "/self-host", variant: "grad" }}
         secondaryCta={{ label: "Read the docs", path: "/opentelemetry", variant: "secondary" }}
       />
@@ -65,23 +65,23 @@ export default function FeaturesPage() {
                 Stream a billion lines. <GradientText>Find one in 200ms.</GradientText>
               </>
             }
-            body="A high-performance vectorized database means every field is indexable, every facet is countable, and every query stays under a second. Tag cardinality never costs you."
+            body="Fast columnar indexing for full-text search, live tailing, and pattern clustering without tag restrictions."
             list={[
               {
-                title: "Full-text + structured in one query",
-                body: 'level=ERROR service="checkout" AND msg ~ "timeout", working the way you\'d type it in your head.',
+                title: "Full-text search",
+                body: "Combine structured filters and message regex in a single query.",
               },
               {
-                title: "Patterns auto-clustered",
-                body: "We learn the templates your services emit. Find the one anomalous line in 4 billion.",
+                title: "Pattern clustering",
+                body: "Automatically group billions of log events into identifiable templates.",
               },
               {
-                title: "Live tail w/ DSL filters",
-                body: "Stream millions of events/sec to your terminal, narrowed by the same DSL you use for search.",
+                title: "Live tail streaming",
+                body: "Stream millions of events per second to browser or terminal.",
               },
               {
                 title: "Per-source quotas",
-                body: "Cap noisy services without dropping them. Routing rules are first-class, not buried in YAML.",
+                body: "Control noisy services with fine-grained routing policies.",
               },
             ]}
             visual={
@@ -104,23 +104,22 @@ export default function FeaturesPage() {
             eyebrow="Distributed tracing"
             title={
               <>
-                Datadog-parity span explorer.{" "}
-                <GradientText>Without the vendor lock-in.</GradientText>
+                High-performance tracing. <GradientText>Zero vendor lock-in.</GradientText>
               </>
             }
-            body="Flame graphs, span diff, latency heatmaps, service maps, and a 10-tab span drawer (overview, children, logs, code, profile, AI explanation, related deploys, errors, queries, tags)."
+            body="Interactive flame graphs, span diffing, latency heatmaps, and deep metadata inspection."
             list={[
               {
-                title: "Compare any two traces",
-                body: "Pin baseline, compare regression. Diff attributes, durations, and span trees side by side.",
+                title: "Compare traces",
+                body: "Diff span durations and attributes to pinpoint regressions instantly.",
               },
               {
-                title: "Cardinality without throttling",
-                body: "Group by user, tenant, region, query, plan_id, or anything else. Tags are stored, not aggregated away.",
+                title: "High cardinality",
+                body: "Filter and group by tenant, user, or custom tags without sampling.",
               },
               {
-                title: "OTLP native, schema-as-you-emit",
-                body: "Send any OpenTelemetry SDK. Your span attributes show up exactly as your code wrote them.",
+                title: "Native OTLP",
+                body: "Compatible with standard OpenTelemetry SDKs out of the box.",
               },
             ]}
             visual={
@@ -145,19 +144,19 @@ export default function FeaturesPage() {
                 PromQL native. <GradientText>Warehouse-scale time series.</GradientText>
               </>
             }
-            body="Ingest OTLP + Prometheus + StatsD side by side. Run PromQL queries on a year of data, including high-cardinality labels."
+            body="Ingest OTLP and Prometheus metrics with sub-second PromQL queries over high-cardinality data."
             list={[
               {
-                title: "Unlimited cardinality, no tag tax",
-                body: "Tags are free. Stop dropping labels just to keep your dashboards fast.",
+                title: "Unlimited cardinality",
+                body: "Tags are free. No metrics dropped to maintain query speed.",
               },
               {
-                title: "Recording rules and SLOs in YAML",
-                body: "GitOps-friendly definitions, applied via API or CLI. Versioned alongside your code.",
+                title: "GitOps SLOs",
+                body: "Define recording rules and alert policies in version-controlled YAML.",
               },
               {
-                title: "AI baselines + seasonal alerts",
-                body: "Skip the static-threshold tuning. Optikk learns the rhythm of your services.",
+                title: "AI baselines",
+                body: "Dynamic anomaly detection based on historical service patterns.",
               },
             ]}
             visual={<TerminalWindow title="~ optikk metrics">{METRICS_SESSION}</TerminalWindow>}
@@ -168,7 +167,7 @@ export default function FeaturesPage() {
       <section className="m-section m-section--ink">
         <div className="m-container">
           <SectionHeader
-            eyebrow="AI SRE · preview"
+            eyebrow="AI SRE"
             title={
               <span style={{ color: "#fff" }}>
                 An on-call engineer that already <GradientText>read your runbook.</GradientText>
@@ -176,9 +175,8 @@ export default function FeaturesPage() {
             }
             lede={
               <span style={{ color: "#c0cee0" }}>
-                The AI SRE reads the same telemetry graph your humans do, including logs, traces, metrics,
-                deploys, and dependencies. It writes the verdict in the language your tenant uses in
-                Slack.
+                The AI SRE analyzes logs, traces, metrics, and deploys to diagnose root causes and
+                recommend actionable fixes.
               </span>
             }
           />
@@ -265,19 +263,19 @@ export default function FeaturesPage() {
                 Trace every prompt. <GradientText>See tokens the way you see latency.</GradientText>
               </>
             }
-            body="Optikk treats LLM calls as spans: prompts, tool calls, function results, and final completions. Tokens, latency, and grading are first-class attributes."
+            body="Trace prompts, tool calls, token volume, and eval scores directly alongside service spans."
             list={[
               {
-                title: "Prompt → tool → answer waterfall",
-                body: "See the full agent chain in the same trace UI as your services. No separate vendor required.",
+                title: "Tool & agent waterfalls",
+                body: "Inspect full agent execution chains in the same trace waterfall as backend services.",
               },
               {
-                title: "Eval scores attached to spans",
-                body: "Wire your judges in once. Every production call is graded; every regression is bisectable.",
+                title: "Evaluation scores",
+                body: "Attach automated LLM evaluation results to individual production spans.",
               },
               {
-                title: "Token volume by user, tenant, feature",
-                body: "Group by any attribute. Find the 0.1% of users driving 40% of OpenAI token usage.",
+                title: "Token cost attribution",
+                body: "Break down token consumption and dollar spend by user, tenant, and model.",
               },
             ]}
             visual={
@@ -320,7 +318,7 @@ export default function FeaturesPage() {
           <SectionHeader
             eyebrow="More signals"
             title="Same lake, more depth."
-            lede="Every product line shares the same query engine. Adding a new signal is a routing rule, not a separate tool."
+            lede="Unified telemetry engine supporting RUM, continuous profiling, SLOs, and custom signals."
             align="center"
           />
           <div className="m-bento">
@@ -328,32 +326,32 @@ export default function FeaturesPage() {
               {
                 icon: Sparkles,
                 title: "Real user monitoring",
-                body: "Browser + mobile spans, Core Web Vitals, session replay links.",
+                body: "Browser and mobile performance, Core Web Vitals, and session errors.",
               },
               {
                 icon: Workflow,
-                title: "Profiles + flamegraphs",
-                body: "Continuous profiling tied to trace IDs. Click a span → see its flamegraph.",
+                title: "Continuous profiling",
+                body: "Flame graphs tied directly to distributed trace IDs for CPU and memory hotspots.",
               },
               {
                 icon: LineChart,
-                title: "SLOs and burn rates",
-                body: "Define SLOs in code, auto-generated dashboards, paged only when budget burns.",
+                title: "SLOs & burn rates",
+                body: "Code-defined SLOs with alerts triggered only when error budgets burn.",
               },
               {
                 icon: ScrollText,
-                title: "Audit + access logs",
-                body: "Compliance-grade retention path with WORM-compatible storage tier.",
+                title: "Audit & access logs",
+                body: "Immutable compliance logs with long-term retention policies.",
               },
               {
                 icon: Bot,
                 title: "Synthetics",
-                body: "Probe APIs and browser flows from 12 regions; results land as spans.",
+                body: "Scheduled API and browser workflow probes running across 12 regions.",
               },
               {
                 icon: Sparkles,
                 title: "Custom signals",
-                body: "Define new entity types and event streams via the typed schema API.",
+                body: "Define domain-specific entity types and event streams via typed schemas.",
               },
             ].map((item) => (
               <article key={item.title.toString()} className="m-bento-card">
@@ -372,7 +370,7 @@ export default function FeaturesPage() {
         title={
           <>
             See it on your own telemetry.{" "}
-            <span style={{ color: "#fdba74" }}>100% open source, no demo required.</span>
+            <span style={{ color: "#fdba74" }}>100% open source.</span>
           </>
         }
         subtitle="Fully self-hostable in under 5 minutes with our Helm chart."

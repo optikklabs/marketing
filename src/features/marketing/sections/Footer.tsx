@@ -73,8 +73,7 @@ export function Footer() {
             <span>Optikk</span>
           </Link>
           <p>
-            Logs, metrics, and traces unified in a single high-performance telemetry platform.
-            OpenTelemetry-native, developer-first, and fully open source.
+            Unified telemetry platform for logs, metrics, and traces. Open source under Apache 2.0.
           </p>
         </div>
 

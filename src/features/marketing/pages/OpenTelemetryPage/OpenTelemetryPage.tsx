@@ -12,25 +12,25 @@ const SOURCES = [
   {
     icon: Boxes,
     title: "Kubernetes",
-    body: "Helm chart for the OTel Collector pre-configured for Optikk OTLP endpoints. Auto-discovers nodes, pods, control plane.",
+    body: "Pre-configured Helm chart for OpenTelemetry Collector with cluster auto-discovery.",
     link: { label: "Helm install", path: "#k8s" },
   },
   {
     icon: Cloud,
     title: "AWS / GCP / Azure",
-    body: "Native receivers for CloudWatch, Stackdriver, and Azure Monitor. Pre-built dashboards land on first ingest.",
+    body: "Direct receivers for CloudWatch, Google Cloud, and Azure Monitor metrics.",
     link: { label: "Cloud receivers", path: "#cloud" },
   },
   {
     icon: Server,
     title: "Hosts & VMs",
-    body: "Static binary collector. Drop into systemd, point at OTLP endpoint, get host metrics + log tailing.",
+    body: "Lightweight static binary collector for host metrics and system logs.",
     link: { label: "VM agent", path: "#host" },
   },
   {
     icon: Network,
     title: "Application SDKs",
-    body: "Use the standard OpenTelemetry SDK for every language. We don't ship a proprietary tracer.",
+    body: "Standard OpenTelemetry SDKs across all major programming languages.",
     link: { label: "SDKs", path: "#app" },
   },
 ];
@@ -121,7 +121,7 @@ export default function OpenTelemetryPage() {
             Point your collector at us. <GradientText>Be ingesting in 4 minutes.</GradientText>
           </>
         }
-        subtitle="Optikk is OpenTelemetry-native. No proprietary agent, no SDK to vendor in, no schema mapping. The OTLP spec is the integration."
+        subtitle="OpenTelemetry-native from day one. No proprietary agents or custom SDKs — point any standard OTLP collector to get started."
         primaryCta={{ label: "Self-host now", path: "/self-host", variant: "grad" }}
         secondaryCta={{ label: "View architecture", path: "/architecture", variant: "secondary" }}
         meta={["OTLP gRPC + HTTP", "Traces · metrics · logs", "All major SDKs"]}
@@ -136,7 +136,7 @@ export default function OpenTelemetryPage() {
                 Three lines of config. <GradientText>One restart.</GradientText>
               </>
             }
-            lede="Wire the OTel Collector exporter to our endpoint. Existing pipelines keep working, and Optikk is just one more exporter target."
+            lede="Add our OTLP endpoint to your collector configuration. Keep your existing pipeline without changes."
           />
           <CodeBlock
             tabs={[
@@ -168,22 +168,22 @@ export default function OpenTelemetryPage() {
             eyebrow="Collector deep-dive"
             title={
               <>
-                Optikk-flavored collector, <GradientText>still 100% upstream.</GradientText>
+                Hardened collector, <GradientText>100% upstream compatible.</GradientText>
               </>
             }
-            body="We publish a hardened build of the OpenTelemetry Collector with sensible defaults: zstd compression, automatic retries, queue persistence, and PII redaction processors enabled."
+            body="Hardened OpenTelemetry Collector build with zstd compression, auto-retries, and disk-backed buffer queues."
             list={[
               {
                 title: "Drop-in upstream",
-                body: "Same binary, same config schema. Swap to community build any time.",
+                body: "Identical config schema. Swap to community builds any time.",
               },
               {
                 title: "Hot-reload routes",
-                body: "Update sampling and redaction rules without restarting the collector.",
+                body: "Update sampling and redaction rules without restarting.",
               },
               {
                 title: "Disk-backed queues",
-                body: "Survive ingest outages up to 24h without data loss. Configurable per pipeline.",
+                body: "Persistent queues prevent data loss during network hiccups.",
               },
             ]}
             visual={<CodeBlock tabs={[{ label: "helm install", content: HELM_SNIPPET }]} />}

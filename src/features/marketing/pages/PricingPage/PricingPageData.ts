@@ -105,26 +105,26 @@ export const PRICING_FAQS = [
   {
     question: "What counts as a GB for logs and traces?",
     answer:
-      "Uncompressed bytes as they arrive at the OTLP endpoint, measured before Optikk's columnar compression. You are never billed for storage amplification, indexes, or replicas.",
+      "Uncompressed bytes arriving at the OTLP endpoint. You are never billed for indexes, replicas, or query overhead.",
   },
   {
     question: "What is an active time series?",
     answer:
-      "An active time series (ATS) is a unique metric name and label combination that reports during an hour. Metrics are billed per 1,000 active time series per hour, with lower rates at higher sustained volumes.",
+      "A unique metric name and label combination reporting in an hour, billed per 1,000 active series.",
   },
   {
     question: "Is self-hosting really free?",
     answer:
-      "Yes. The entire platform, including SAML SSO, clustering, and the AI SRE, is Apache 2.0 licensed with no feature gates. Managed Optikk is the exact same code, just hosted and operated by us.",
+      "Yes. The entire platform (including SAML SSO, clustering, and the AI SRE) is Apache 2.0 licensed with no feature gates.",
   },
   {
     question: "How does billing work?",
     answer:
-      "Usage is metered continuously and billed monthly in arrears. Annual plans have a monthly minimum commitment; there are no per-seat or per-host charges.",
+      "Usage is metered continuously and billed monthly in arrears with no per-seat or per-host fees.",
   },
   {
     question: "Do you offer volume or enterprise pricing?",
     answer:
-      "Yes. For sustained high volumes, custom retention, or dedicated deployments, contact us at support@optikk.in and we'll put together a quote.",
+      "Yes. Contact support@optikk.in for custom retention, volume commitments, or dedicated VPC deployments.",
   },
 ] as const;

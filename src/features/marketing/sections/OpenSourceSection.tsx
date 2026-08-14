@@ -19,9 +19,8 @@ export function OpenSourceSection() {
           }
           lede={
             <span style={{ color: "#c0cee0" }}>
-              The engine, the OTel collector build, the language SDKs, and the Helm chart all live
-              on GitHub. Self-host runs the same binaries Cloud does with no proprietary fork, no
-              closed core.
+              The engine, collector build, SDKs, and Helm chart are 100% open source under Apache
+              2.0.
             </span>
           }
         />
@@ -45,9 +44,7 @@ export function OpenSourceSection() {
               <Github size={20} />
             </span>
             <h3 className="m-h4">optikk-frontend</h3>
-            <p className="m-body-sm">
-              Frontend UI dashboard of Observability. Built with React 19, Vite, and TypeScript.
-            </p>
+            <p className="m-body-sm">React 19 dashboard for traces, logs, and metrics.</p>
             <div className="m-bento-link">
               <Star size={13} strokeWidth={2.4} /> {formatStars(stars["optikk-frontend"] || 0)} ·
               Apache 2.0
@@ -64,10 +61,7 @@ export function OpenSourceSection() {
               <Github size={20} />
             </span>
             <h3 className="m-h4">optikk-backend</h3>
-            <p className="m-body-sm">
-              Go core backend engine. Handles high-throughput ingestion, storage, and AI-assisted
-              query resolution.
-            </p>
+            <p className="m-body-sm">High-throughput Go engine for ingestion and queries.</p>
             <div className="m-bento-link">
               <Star size={13} strokeWidth={2.4} /> {formatStars(stars["optikk-backend"] || 0)} ·
               Apache 2.0
@@ -84,9 +78,7 @@ export function OpenSourceSection() {
               <Github size={20} />
             </span>
             <h3 className="m-h4">scheduler</h3>
-            <p className="m-body-sm">
-              Distributed Go scheduling engine for alerting pipelines and tasks orchestration.
-            </p>
+            <p className="m-body-sm">Distributed Go scheduling engine for alert evaluation.</p>
             <div className="m-bento-link">
               <Star size={13} strokeWidth={2.4} /> {formatStars(stars.scheduler || 0)} · Apache 2.0
             </div>
@@ -102,9 +94,7 @@ export function OpenSourceSection() {
               <Github size={20} />
             </span>
             <h3 className="m-h4">opentelemetry-demo</h3>
-            <p className="m-body-sm">
-              Astronomy Shop microservices demonstration instrumented with OpenTelemetry.
-            </p>
+            <p className="m-body-sm">Microservices demo instrumented with OpenTelemetry.</p>
             <div className="m-bento-link">
               <Star size={13} strokeWidth={2.4} /> {formatStars(stars["opentelemetry-demo"] || 0)} ·
               Apache 2.0

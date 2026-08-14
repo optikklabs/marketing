@@ -14,51 +14,51 @@ const LAYERS = [
     name: "Ingest",
     label: "Layer 01",
     icon: Cloud,
-    body: "OTLP/HTTP, OTLP/gRPC, Prometheus remote-write, Fluent-bit, Vector. Stateless receivers behind a load balancer; horizontally scaled per region.",
+    body: "Stateless HTTP and gRPC receivers supporting OTLP, Prometheus, and Vector.",
   },
   {
     name: "Routing",
     label: "Layer 02",
     icon: GitBranch,
-    body: "Per-source quotas, sampling, PII redaction, tenant fan-out. Routes are versioned, GitOps-friendly, and hot-reloadable.",
+    body: "Dynamic per-source quotas, sampling, and automated PII redaction.",
   },
   {
     name: "Stream buffer · Kafka",
     label: "Layer 03",
     icon: Zap,
-    body: "Every event passes through Kafka. Decouples ingest spikes from storage writes; powers replay, multi-consumer fan-out, and disaster recovery.",
+    body: "Decouples ingest spikes from storage writes and powers stream replay.",
   },
   {
     name: "Columnar store · ClickHouse",
     label: "Layer 04",
     icon: Database,
-    body: "Sharded ClickHouse cluster holds logs, metrics, and trace spans. Vectorized SIMD scans, projection indexes, and per-tenant tables for isolation.",
+    body: "High-performance columnar storage for petabyte-scale telemetry scans.",
     grad: true,
   },
   {
     name: "Metadata · MySQL",
     label: "Layer 05",
     icon: HardDrive,
-    body: "Workspaces, users, RBAC, dashboards, alerts, and the Context Graph live in MySQL. Strongly consistent, point-in-time recoverable.",
+    body: "ACID storage for workspaces, RBAC, alerts, and topology graphs.",
   },
   {
     name: "Live tail + cache · Redis",
     label: "Layer 06",
     icon: Network,
-    body: "Redis powers live tail fan-out, real-time alert state, query result cache, and rate limits. Keeps the hot path off ClickHouse.",
+    body: "Sub-millisecond query caching and real-time live tail fan-out.",
   },
   {
     name: "AI SRE",
     label: "Layer 07",
     icon: Bot,
-    body: "Reasoning runtime grounded on the Context Graph + raw telemetry. Stateless, RAG-style; never trains on customer data.",
+    body: "Reasoning engine analyzing the telemetry graph for automated incident diagnostics.",
     grad: true,
   },
   {
     name: "API + apps",
     label: "Layer 08",
     icon: Server,
-    body: "GraphQL + REST + WebSocket. Web UI, terminal client, IDE plugins, Slack/Tenants bots are all on the same API.",
+    body: "Unified GraphQL, REST, and WebSocket APIs powering UI and terminal clients.",
   },
 ];
 
@@ -72,7 +72,7 @@ export default function ArchitecturePage() {
             Boring underneath. <GradientText>Fast on top.</GradientText>
           </>
         }
-        subtitle="Optikk is built on the same primitives you'd reach for in any high-throughput system: Kafka for ingest, ClickHouse for columnar query, MySQL for metadata, Redis for live-tail and cache. No exotic store, no agent magic."
+        subtitle="Built on proven high-throughput primitives: Kafka for streaming, ClickHouse for columnar queries, MySQL for metadata, and Redis for real-time caching."
         primaryCta={{ label: "Read the deep dive", path: "/opentelemetry", variant: "grad" }}
         secondaryCta={{ label: "Self-host options", path: "/self-host", variant: "secondary" }}
       />
@@ -114,19 +114,19 @@ export default function ArchitecturePage() {
                 ClickHouse, <GradientText>tuned for telemetry.</GradientText>
               </>
             }
-            body="A sharded ClickHouse cluster is the heart of Optikk. We pre-build projection indexes for the queries observability tools actually run (group-by service, percentile, top-k, time-bucketed) so even on weeks of data, p99 query latency stays under 200ms."
+            body="A sharded ClickHouse cluster with pre-built projection indexes optimized for sub-200ms analytical queries."
             list={[
               {
-                title: "Vectorized SIMD scans",
-                body: "ClickHouse's MergeTree engine reads only the columns and partitions a query touches. Tag cardinality is free.",
+                title: "Vectorized scans",
+                body: "Reads only requested columns to keep query latency minimal.",
               },
               {
-                title: "Per-tenant isolation",
-                body: "Each workspace gets its own database within the cluster. Noisy neighbors don't slow your queries.",
+                title: "Tenant isolation",
+                body: "Dedicated database namespaces prevent noisy neighbor interference.",
               },
               {
-                title: "Kafka-fed writes",
-                body: "Every event arrives through Kafka, then materializes into ClickHouse. Replay any window if downstream needs a re-shape.",
+                title: "Kafka pipeline",
+                body: "Continuous buffered ingestion with replay capabilities.",
               },
             ]}
             visual={
@@ -177,19 +177,19 @@ TTL timestamp + INTERVAL 30 DAY;`,
                 Telemetry, <GradientText>turned into a graph in MySQL.</GradientText>
               </>
             }
-            body="Every entity (service, deploy, host, pod, query plan, user) is a row. Every relationship is an edge built from spans, logs, and deploys. The graph is materialized into MySQL so AI investigations and human searches both traverse it consistently."
+            body="Real-time topology graph mapping relationships between services, pods, and deployments."
             list={[
               {
-                title: "Materialized incrementally",
-                body: "A Kafka consumer extracts entities + edges from spans in real time. The graph lags telemetry by ~3 seconds.",
+                title: "Real-time extraction",
+                body: "Entities and dependencies extracted continuously from span streams.",
               },
               {
-                title: "Queryable via our DSL",
-                body: "service:checkout -> depends_on -> ? returns the dependency frontier as JSON.",
+                title: "Graph DSL",
+                body: "Simple traversal queries to inspect service dependencies.",
               },
               {
-                title: "Versioned with deploys",
-                body: "Edges carry validity intervals. Time-travel a week back to see what the topology looked like before the regression.",
+                title: "Deploy versioning",
+                body: "Historical topology tracking to compare architectures over time.",
               },
             ]}
             visual={
@@ -232,19 +232,19 @@ WHERE s.kind = 'service'
                 Redis carries the hot path, <GradientText>not ClickHouse.</GradientText>
               </>
             }
-            body="Live tail, alert state machines, query result cache, and per-tenant rate limits all live in Redis. ClickHouse is reserved for analytical workloads where columnar wins; Redis handles the millisecond stuff."
+            body="In-memory Redis layer handling streaming subscriptions and alert state machines."
             list={[
               {
-                title: "Live tail fan-out",
-                body: "Every Kafka event also goes to Redis pub/sub. A million concurrent tail filters fan out without touching the columnar store.",
+                title: "Live tail pub/sub",
+                body: "Concurrent log tailing without burdening the analytical database.",
               },
               {
-                title: "Alert evaluation cache",
-                body: "Active alert state is in Redis, not re-derived on every check. Sub-second alert latency at scale.",
+                title: "Stateful alerts",
+                body: "Instant alert rule evaluation with cached state.",
               },
               {
-                title: "Query result memoization",
-                body: "Popular dashboards hit Redis first. Cache invalidation keyed on ingest watermark, not wall-clock.",
+                title: "Result caching",
+                body: "Memoized queries for frequently viewed dashboards.",
               },
             ]}
             visual={
@@ -286,8 +286,8 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
             <article className="is-wide m-bento-card">
               <h3 className="m-h3">Database saturation</h3>
               <p className="m-body-sm">
-                Query throughput, percentile latency, replication lag, and deadlocks are keyed to the
-                ClickHouse + MySQL layers.
+                Query throughput, percentile latency, replication lag, and deadlocks are keyed to
+                the ClickHouse + MySQL layers.
               </p>
               <Screenshot
                 name="database"
@@ -297,8 +297,8 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
             <article className="is-wide m-bento-card">
               <h3 className="m-h3">Kafka broker fleet</h3>
               <p className="m-body-sm">
-                Per-broker throughput, ISR shrinks, under-replicated partitions, and consumer lag are the
-                full Kafka SRE surface.
+                Per-broker throughput, ISR shrinks, under-replicated partitions, and consumer lag
+                are the full Kafka SRE surface.
               </p>
               <Screenshot
                 name="kafka"
@@ -319,8 +319,8 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
             <article className="is-wide m-bento-card">
               <h3 className="m-h3">Service detail</h3>
               <p className="m-body-sm">
-                Drill into one service to see requests, errors, latency, top endpoints, and top exceptions.
-                One click from any alert.
+                Drill into one service to see requests, errors, latency, top endpoints, and top
+                exceptions. One click from any alert.
               </p>
               <Screenshot
                 name="service-detail"
@@ -338,7 +338,7 @@ PUBLISH livetail:tenant:acme:logs:service=checkout,level=ERROR {
             <span style={{ color: "#fdba74" }}>Bring an OTel collector.</span>
           </>
         }
-        subtitle="Self-host on Kubernetes (Helm bundles Kafka, ClickHouse, MySQL, Redis) to run completely in your own infrastructure with zero vendor lock-in."
+        subtitle="Deploy on Kubernetes with our Helm chart to run entirely within your own infrastructure."
         primary={{ label: "Self-host options", path: "/self-host" }}
         secondary={{ label: "OpenTelemetry setup", path: "/opentelemetry", variant: "secondary" }}
       />

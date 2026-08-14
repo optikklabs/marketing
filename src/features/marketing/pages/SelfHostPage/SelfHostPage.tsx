@@ -15,24 +15,22 @@ const MODES = [
   {
     icon: Terminal,
     name: "Docker Compose (Local)",
-    pitch: "Perfect for local development, testing, and small telemetry volumes.",
+    pitch: "Local development, testing, and sandbox environments.",
     features: [
-      "Up in 10 seconds via docker-compose",
-      "Includes mock generator feeds",
-      "Zero external dependencies required",
-      "Ideal for laptop/sandbox environments",
+      "Up in 10 seconds via docker compose",
+      "Includes mock telemetry generator feeds",
+      "Zero external dependencies",
     ],
     cta: { label: "View Compose config", path: OSS.frontend },
   },
   {
     icon: ServerCog,
     name: "Kubernetes (Helm)",
-    pitch: "Production-scale deployment with bundled analytical infrastructure.",
+    pitch: "Production deployment with bundled analytical stores.",
     features: [
       "Bundles Kafka, ClickHouse, MySQL, Redis",
-      "Stateless ingestion autoscaling",
-      "Built-in data retention policies",
-      "Rolling upgrades supported out-of-the-box",
+      "Stateless autoscaling ingestion pipeline",
+      "Rolling upgrades supported out of the box",
     ],
     cta: { label: "Read Helm guide", path: "/architecture" },
     featured: true,
@@ -40,12 +38,11 @@ const MODES = [
   {
     icon: Layers,
     name: "Terraform (IaC)",
-    pitch: "Deploy into your cloud VPC utilizing managed infrastructure services.",
+    pitch: "Deploy into your cloud VPC with managed cloud services.",
     features: [
       "Integrates MSK, RDS, and ElastiCache",
-      "Fully isolated private networking",
+      "Fully isolated private VPC networking",
       "IAM-based access controls",
-      "S3 / GCS deep-storage integration",
     ],
     cta: { label: "View TF modules", path: OSS.org },
   },
@@ -54,23 +51,23 @@ const MODES = [
 const FEATURES = [
   {
     icon: ShieldCheck,
-    title: "Data residency by default",
-    body: "Run within your security boundary. S3, Kafka, ClickHouse, MySQL, and Redis remain completely within your VPC.",
+    title: "Data residency",
+    body: "All telemetry, storage, and compute remain completely within your VPC.",
   },
   {
     icon: ServerCog,
     title: "Built-in SSO",
-    body: "Connect your existing identity providers using SAML SSO and IDP group mapping. Secure by default, no paywalls.",
+    body: "SAML 2.0 and OIDC support with IDP group mapping included for free.",
   },
   {
     icon: Database,
     title: "Retention tiering",
-    body: "Store hot data in ClickHouse, warm in compressed storage parts, and cold in S3/GCS buckets. Keep up to 7 years of history.",
+    body: "Hot data in ClickHouse with warm and cold archiving to S3 or GCS.",
   },
   {
     icon: Terminal,
     title: "AI SRE integrated",
-    body: "Grounded AI diagnostic helpers ship natively in the core. Get summaries and diagnostics on your telemetry graph.",
+    body: "Diagnostic reasoning engine runs locally against your own telemetry graph.",
   },
 ];
 
@@ -78,14 +75,13 @@ const FAQS = [
   {
     question: "Do you offer commercial support?",
     answer:
-      "The self-hosted platform is 100% open source under the Apache 2.0 license with no proprietary add-ons. All features, databases, and setups are fully available to the community for free. If you'd rather not operate it yourself, Managed Optikk runs the same platform for you with usage-based pricing.",
+      "The self-hosted platform is 100% open source under Apache 2.0 with no proprietary add-ons. If you prefer a managed service, Managed Optikk runs the exact same platform for you.",
   },
   {
     question: "Is there a hosted version?",
     answer: (
       <>
-        Yes, Managed Optikk is the exact same open-source platform, hosted and operated by us. You
-        pay only for what you ingest: $0.05/GB logs, $0.06/GB traces, $0.001/DPM metrics. See{" "}
+        Yes, Managed Optikk is the exact same open-source platform operated by us. See{" "}
         <Link to={"/pricing" as string & {}}>pricing</Link> for details.
       </>
     ),
@@ -93,17 +89,17 @@ const FAQS = [
   {
     question: "How big does the Kubernetes cluster need to be?",
     answer:
-      "For up to 10 TB/day of telemetry: a 12-node Kubernetes cluster (8 vCPU / 32 GiB nodes) with a 6-broker Kafka, a 6-shard ClickHouse, a managed or self-run MySQL, and a 3-node Redis. The Helm chart bundles all of it; we provide sizing worksheets for higher scales.",
+      "A 12-node cluster (8 vCPU / 32 GiB per node) easily handles up to 10 TB/day of telemetry. The Helm chart bundles all components with sizing worksheets provided for higher volumes.",
   },
   {
-    question: "Do you support HIPAA / compliance?",
+    question: "Do you support HIPAA and SOC 2?",
     answer:
-      "Yes. Since you host the entire platform in your own infrastructure, all data stays within your compliance boundary. Optikk is fully compatible with HIPAA, SOC 2, and FedRAMP requirements when deployed inside your audited environment.",
+      "Yes. Because you host the entire platform in your own infrastructure, all data stays strictly within your compliance perimeter.",
   },
   {
     question: "Is there a paid enterprise edition?",
     answer:
-      "No, Optikk is fully committed to open source. There are no closed-source enterprise forks or feature-gated editions. Every capability (including SAML SSO, clustering, and AI SRE) is included in the open-source repository.",
+      "No. All capabilities (including SAML SSO, clustering, and AI SRE) are included in the open-source repository with no feature gates.",
   },
 ];
 
@@ -117,7 +113,7 @@ export default function SelfHostPage() {
             Run Optikk where your data <GradientText>is supposed to live.</GradientText>
           </>
         }
-        subtitle="Run Optikk fully self-hosted in your Kubernetes cluster, private cloud, or air-gapped environments. Same engine, same AI SRE, complete data control."
+        subtitle="Deploy Optikk in your Kubernetes cluster, private cloud, or air-gapped environment with full code parity and complete data control."
         primaryCta={{
           label: "View on GitHub",
           path: OSS.org,
