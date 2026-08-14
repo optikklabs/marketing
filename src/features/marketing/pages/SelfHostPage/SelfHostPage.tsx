@@ -21,7 +21,7 @@ const MODES = [
       "Includes mock telemetry generator feeds",
       "Zero external dependencies",
     ],
-    cta: { label: "View Compose config", path: OSS.frontend },
+    cta: { label: "View Compose config", path: OSS.web },
   },
   {
     icon: ServerCog,

@@ -19,9 +19,10 @@ const FOOTER_GROUPS = [
   {
     title: "Open source",
     links: [
-      { label: "Frontend · optikk-frontend", path: OSS.frontend },
-      { label: "Backend · optikk-backend", path: OSS.backend },
-      { label: "Scheduler · scheduler", path: OSS.scheduler },
+      { label: "Web · web", path: OSS.web },
+      { label: "Ingest · ingest", path: OSS.ingest },
+      { label: "Query · query", path: OSS.query },
+      { label: "CLI · optikk", path: OSS.cli },
       { label: "All repos", path: OSS.org },
     ],
   },
@@ -29,8 +30,7 @@ const FOOTER_GROUPS = [
     title: "Developers",
     links: [
       { label: "OpenTelemetry", path: "/opentelemetry" },
-      { label: "Java Agent", path: OSS.otelJava },
-      { label: "OTel Shop Demo", path: OSS.otelDemo },
+      { label: "Architecture", path: "/architecture" },
       { label: "Docs", path: "https://docs.optikk.dev" },
       { label: "Status", path: "https://status.optikk.dev" },
     ],
@@ -95,12 +95,12 @@ export function Footer() {
         <span>
           © {new Date().getFullYear()} Optikk, Inc. · {OSS.license} licensed ·
           <a
-            href={OSS.frontend}
+            href={OSS.web}
             target="_blank"
             rel="noreferrer"
             style={{ color: "inherit", marginLeft: 6, textDecoration: "underline" }}
           >
-            optikksense/optikk-frontend
+            optikklabs/web
           </a>
         </span>
         <div className="m-footer-socials">

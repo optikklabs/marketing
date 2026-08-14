@@ -39,17 +39,18 @@ export default function TermsOfServicePage() {
 
       <h2>4. Self-Hosted Licensing</h2>
       <p>
-        Optikk is fully open source under the Apache License 2.0. The software, engine, scheduler,
-        and dashboards are provided free of charge, and you may compile, deploy, and self-host the
-        Service within your own infrastructure without fees, license keys, or usage caps.
+        Optikk is fully open source under the Apache License 2.0. The software, ingest, query
+        engine, and web dashboards are provided free of charge, and you may compile, deploy, and
+        self-host the Service within your own infrastructure without fees, license keys, or usage
+        caps.
       </p>
 
       <h2>5. Intellectual Property</h2>
       <p>
         The Service, including its design, code, interface, and branding, is the property of Optikk
-        or its licensors. Note that the core engine, scheduler, and frontend dashboards are made
-        available under the Apache License 2.0. Your rights to compile, run, and self-host our open
-        source components are governed separately by that license.
+        or its licensors. Note that the ingest pipeline, query engine, CLI, and web dashboards are
+        made available under the Apache License 2.0. Your rights to compile, run, and self-host our
+        open source components are governed separately by that license.
       </p>
 
       <h2>6. Termination</h2>

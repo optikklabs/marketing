@@ -1,10 +1,11 @@
 export const OSS = {
-  org: "https://github.com/optikksense",
-  frontend: "https://github.com/optikksense/optikk-frontend",
-  backend: "https://github.com/optikksense/optikk-backend",
-  scheduler: "https://github.com/optikksense/scheduler",
-  otelJava: "https://github.com/optikksense/opentelemetry-java",
-  otelDemo: "https://github.com/optikksense/opentelemetry-demo",
+  org: "https://github.com/optikklabs",
+  web: "https://github.com/optikklabs/web",
+  ingest: "https://github.com/optikklabs/ingest",
+  query: "https://github.com/optikklabs/query",
+  cli: "https://github.com/optikklabs/optikk",
+  frontend: "https://github.com/optikklabs/web",
+  backend: "https://github.com/optikklabs/query",
   license: "Apache 2.0",
 } as const;
 

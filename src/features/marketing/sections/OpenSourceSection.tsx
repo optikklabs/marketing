@@ -35,7 +35,7 @@ export function OpenSourceSection() {
         >
           <a
             className="is-ink m-bento-card"
-            href={OSS.frontend}
+            href={OSS.web}
             target="_blank"
             rel="noreferrer"
             style={{ textDecoration: "none" }}
@@ -43,16 +43,15 @@ export function OpenSourceSection() {
             <span className="m-bento-icon">
               <Github size={20} />
             </span>
-            <h3 className="m-h4">optikk-frontend</h3>
+            <h3 className="m-h4">web</h3>
             <p className="m-body-sm">React 19 dashboard for traces, logs, and metrics.</p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars["optikk-frontend"] || 0)} ·
-              Apache 2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.web || 0)} · Apache 2.0
             </div>
           </a>
           <a
             className="is-ink m-bento-card"
-            href={OSS.backend}
+            href={OSS.ingest}
             target="_blank"
             rel="noreferrer"
             style={{ textDecoration: "none" }}
@@ -60,16 +59,15 @@ export function OpenSourceSection() {
             <span className="m-bento-icon">
               <Github size={20} />
             </span>
-            <h3 className="m-h4">optikk-backend</h3>
-            <p className="m-body-sm">High-throughput Go engine for ingestion and queries.</p>
+            <h3 className="m-h4">ingest</h3>
+            <p className="m-body-sm">High-throughput Go telemetry ingestion pipeline.</p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars["optikk-backend"] || 0)} ·
-              Apache 2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.ingest || 0)} · Apache 2.0
             </div>
           </a>
           <a
             className="is-ink m-bento-card"
-            href={OSS.scheduler}
+            href={OSS.query}
             target="_blank"
             rel="noreferrer"
             style={{ textDecoration: "none" }}
@@ -77,15 +75,15 @@ export function OpenSourceSection() {
             <span className="m-bento-icon">
               <Github size={20} />
             </span>
-            <h3 className="m-h4">scheduler</h3>
-            <p className="m-body-sm">Distributed Go scheduling engine for alert evaluation.</p>
+            <h3 className="m-h4">query</h3>
+            <p className="m-body-sm">Analytical query engine and AI diagnostic backend.</p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.scheduler || 0)} · Apache 2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.query || 0)} · Apache 2.0
             </div>
           </a>
           <a
             className="is-ink m-bento-card"
-            href={OSS.otelDemo}
+            href={OSS.cli}
             target="_blank"
             rel="noreferrer"
             style={{ textDecoration: "none" }}
@@ -93,11 +91,10 @@ export function OpenSourceSection() {
             <span className="m-bento-icon">
               <Github size={20} />
             </span>
-            <h3 className="m-h4">opentelemetry-demo</h3>
-            <p className="m-body-sm">Microservices demo instrumented with OpenTelemetry.</p>
+            <h3 className="m-h4">optikk</h3>
+            <p className="m-body-sm">Developer and AI coding agent command-line interface.</p>
             <div className="m-bento-link">
-              <Star size={13} strokeWidth={2.4} /> {formatStars(stars["opentelemetry-demo"] || 0)} ·
-              Apache 2.0
+              <Star size={13} strokeWidth={2.4} /> {formatStars(stars.optikk || 0)} · Apache 2.0
             </div>
           </a>
         </div>
@@ -113,7 +110,7 @@ export function OpenSourceSection() {
         >
           <a
             className="m-btn m-btn-primary"
-            href={OSS.frontend}
+            href={OSS.web}
             target="_blank"
             rel="noreferrer"
             style={{ background: "#fff", color: "var(--m-ink)", borderColor: "#fff" }}

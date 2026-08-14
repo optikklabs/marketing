@@ -11,11 +11,10 @@ interface RepoData {
 
 export function useGitHubStars() {
   const [stars, setStars] = useState<Record<string, number>>({
-    "optikk-frontend": 0,
-    "optikk-backend": 0,
-    scheduler: 0,
-    "opentelemetry-java": 0,
-    "opentelemetry-demo": 0,
+    web: 0,
+    ingest: 0,
+    query: 0,
+    optikk: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,7 +31,7 @@ export function useGitHubStars() {
     } catch (e) {}
 
     let active = true;
-    fetch("https://api.github.com/orgs/optikksense/repos")
+    fetch("https://api.github.com/orgs/optikklabs/repos")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch Github stars");
         return res.json() as Promise<RepoData[]>;
@@ -40,11 +39,10 @@ export function useGitHubStars() {
       .then((data) => {
         if (!active) return;
         const newStars: Record<string, number> = {
-          "optikk-frontend": 0,
-          "optikk-backend": 0,
-          scheduler: 0,
-          "opentelemetry-java": 0,
-          "opentelemetry-demo": 0,
+          web: 0,
+          ingest: 0,
+          query: 0,
+          optikk: 0,
         };
         data.forEach((repo) => {
           if (repo?.name) {

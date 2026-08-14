@@ -51,7 +51,7 @@ export const PILLARS = [
   {
     icon: Github,
     title: "Open source at the core",
-    body: "Engine, scheduler, and UI are 100% open source under Apache 2.0.",
+    body: "Ingest, query, and web UI are 100% open source under Apache 2.0.",
     link: { label: "View on GitHub", path: OSS.org },
   },
 ];
