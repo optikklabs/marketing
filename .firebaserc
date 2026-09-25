@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "optikk-frontend-9a072"
+    "default": "optikk-4818a",
+    "optikk": "optikk-4818a"
   }
 }

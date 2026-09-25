@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "optikk-frontend",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
